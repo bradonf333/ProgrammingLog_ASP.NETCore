@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskFormComponent implements OnInit {
 
+  pageTitle: string = "Create a new Programming Task"
   constructor() { }
 
   ngOnInit() {
