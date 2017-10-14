@@ -5,10 +5,23 @@ using System.Collections.Generic;
 
 namespace ProgrammingLog.Migrations
 {
-    public partial class InitialModel : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ProgrammingLanguages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Language = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgrammingLanguages", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Tasks",
                 columns: table => new
@@ -26,33 +39,40 @@ namespace ProgrammingLog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProgrammingLanguages",
+                name: "TaskLanguages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Language = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    TaskId = table.Column<int>(type: "int", nullable: true)
+                    TaskId = table.Column<int>(type: "int", nullable: false),
+                    LanguageId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProgrammingLanguages", x => x.Id);
+                    table.PrimaryKey("PK_TaskLanguages", x => new { x.TaskId, x.LanguageId });
                     table.ForeignKey(
-                        name: "FK_ProgrammingLanguages_Tasks_TaskId",
+                        name: "FK_TaskLanguages_ProgrammingLanguages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "ProgrammingLanguages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskLanguages_Tasks_TaskId",
                         column: x => x.TaskId,
                         principalTable: "Tasks",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgrammingLanguages_TaskId",
-                table: "ProgrammingLanguages",
-                column: "TaskId");
+                name: "IX_TaskLanguages_LanguageId",
+                table: "TaskLanguages",
+                column: "LanguageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TaskLanguages");
+
             migrationBuilder.DropTable(
                 name: "ProgrammingLanguages");
 

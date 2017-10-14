@@ -29,11 +29,7 @@ namespace ProgrammingLog.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<int?>("TaskId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TaskId");
 
                     b.ToTable("ProgrammingLanguages");
                 });
@@ -60,11 +56,30 @@ namespace ProgrammingLog.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("ProgrammingLog.Models.ProgrammingLanguage", b =>
+            modelBuilder.Entity("ProgrammingLog.Models.TaskLanguage", b =>
                 {
-                    b.HasOne("ProgrammingLog.Models.Task")
+                    b.Property<int>("TaskId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.HasKey("TaskId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("TaskLanguages");
+                });
+
+            modelBuilder.Entity("ProgrammingLog.Models.TaskLanguage", b =>
+                {
+                    b.HasOne("ProgrammingLog.Models.ProgrammingLanguage", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProgrammingLog.Models.Task", "Task")
                         .WithMany("Languages")
-                        .HasForeignKey("TaskId");
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

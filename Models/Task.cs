@@ -24,11 +24,11 @@ namespace ProgrammingLog.Models
         [Required]
         public DateTime TaskDate { get; set; }
 
-        public IList<ProgrammingLanguage> Languages { get; set; }
+        public IList<TaskLanguage> Languages { get; set; }
 
         public Task()
         {
-            Languages = new List<ProgrammingLanguage>();
+            Languages = new List<TaskLanguage>();
         }
 
     }
