@@ -1,20 +1,24 @@
 <div class='panel panel-primary'>
 
   <div class='panel-heading'>
-    {{pageTitle}}
+    <h3>{{pageTitle}}</h3>
   </div>
 
   <div class='panel-body'>
 
     <form class='form-horizontal'>
-      <div class='form-group'>
-        <label for='language' class='col-sm-2 control-label'>Available Languages</label>
-        <div class='col-sm-3'>
-            <div class="form-group">
-              
-            </div>
+      <div class='row'>
+        <h3 class='col-md-4'>Available Languages</h3>
+      </div>
+
+      <div class='col-md-3'>
+        <div class='row' *ngFor='let l of languages'>
+          <label class='form-check-label'>
+            <input class='form-check-input' type='checkbox' id='lang{{ l.id }}'> {{ l.language }}
+          </label>
         </div>
       </div>
     </form>
+
   </div>
 </div>

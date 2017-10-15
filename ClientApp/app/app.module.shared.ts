@@ -1,3 +1,4 @@
+import { TaskService } from './service/task.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { NgModule } from '@angular/core';
@@ -33,7 +34,8 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'welcome' }
         ])
-    ]
+    ],
+    providers: [ TaskService ]
 })
 export class AppModuleShared {
 }

@@ -1,3 +1,4 @@
+import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskFormComponent implements OnInit {
 
-  pageTitle: string = "Create a new Programming Task"
-  constructor() { }
+  pageTitle: string = "Create a new Programming Task";
+  languages: any[];
+
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.taskService.getLanguages()
+      .subscribe(languages => {
+        this.languages = languages;
+        console.log("Languages", this.languages);
+      })
   }
 
 }

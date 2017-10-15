@@ -14,7 +14,7 @@ namespace ProgrammingLog.Controllers
             this.dbContext = dbContext;
         }
 
-        [HttpGet("/api/Languages")]
+        [HttpGet("/api/languages")]
         public async Task<IEnumerable<ProgrammingLanguage>> GetLanguages()
         {
             return await dbContext.ProgrammingLanguages.ToListAsync();
