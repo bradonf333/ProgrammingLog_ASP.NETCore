@@ -18,6 +18,37 @@
           </label>
         </div>
       </div>
+
+      <div class='row'>
+        <div class='col-md-6'>
+          <br>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <br>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table" *ngIf='tasks && tasks.length'>
+          <thead>
+            <tr>
+              <th>Hours</th>
+              <th>Language(s)</th>
+              <th>Task Summary</th>
+              <th>Task Date</th>
+            </tr>
+            <tr *ngFor='let task of tasks'>
+              <td>{{ task.hours | number:'.1-5'}}</td>
+              <td><span *ngFor='let lang of task.languages'> | {{ lang }} | </span></td>
+              <td>{{ task.summary }}</td>
+              <td>{{ task.taskDate | date:'short' }}</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
     </form>
 
   </div>
