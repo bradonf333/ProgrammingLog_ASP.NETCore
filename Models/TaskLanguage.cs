@@ -7,7 +7,7 @@ namespace ProgrammingLog.Models
     {
         public int TaskId { get; set; }
         public int LanguageId { get; set; }
-        public Task Task { get; set; }
+        public ProgrammingTask Task { get; set; }
         public ProgrammingLanguage Language { get; set; }
     }
 }

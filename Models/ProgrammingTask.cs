@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProgrammingLog.Models
 {
     [Table("Tasks")]
-    public class Task
+    public class ProgrammingTask
     {
         public int Id { get; set; }
         
@@ -26,7 +26,7 @@ namespace ProgrammingLog.Models
 
         public IList<TaskLanguage> Languages { get; set; }
 
-        public Task()
+        public ProgrammingTask()
         {
             Languages = new List<TaskLanguage>();
         }

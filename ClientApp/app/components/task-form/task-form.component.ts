@@ -10,6 +10,7 @@ export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
   languages: any[];
+  tasks: any[];
 
   constructor(private taskService: TaskService) { }
 
@@ -18,7 +19,13 @@ export class TaskFormComponent implements OnInit {
       .subscribe(languages => {
         this.languages = languages;
         console.log("Languages", this.languages);
-      })
+      });
+
+    this.taskService.getTasks()
+      .subscribe(tasks => {
+        this.tasks = tasks;
+        console.log("Tasks", this.tasks);
+      });
   }
 
 }
