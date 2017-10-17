@@ -41,7 +41,7 @@
             </tr>
             <tr *ngFor='let task of tasks'>
               <td>{{ task.hours | number:'.1-5'}}</td>
-              <td><span *ngFor='let lang of task.languages'> | {{ lang }} | </span></td>
+              <td><span *ngFor='let lang of task.languages'>{{ lang }} <br> </span></td>
               <td>{{ task.summary }}</td>
               <td>{{ task.taskDate | date:'short' }}</td>
             </tr>
