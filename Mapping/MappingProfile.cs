@@ -9,11 +9,14 @@ namespace ProgrammingLog.Mapping
     {
         public MappingProfile()
         {
+            // Domain to API Resource
             CreateMap<ProgrammingTask, ProgrammingTaskResource>()
             .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.Languages.Select(
                 tl => tl.LanguageId
             )));
-            CreateMap<TaskLanguage, KeyValuePairResource>();
+            CreateMap<ProgrammingLanguage, KeyValuePairResource>();
+
+            // API Resource to Domain
         }
     }
 }
