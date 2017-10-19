@@ -19,5 +19,13 @@ namespace ProgrammingLog.Controllers
         {
             return await dbContext.ProgrammingLanguages.ToListAsync();
         }
+
+        [HttpGet("/api/languages/{id}")]
+        public async Task<ProgrammingLanguage> GetLanguageById(int id)
+        {
+            var item = dbContext.ProgrammingLanguages.FirstOrDefaultAsync(l => l.Id == id);
+            return await item;
+        }
+
     }
 }

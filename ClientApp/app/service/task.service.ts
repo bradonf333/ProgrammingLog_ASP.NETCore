@@ -7,6 +7,7 @@ export class TaskService {
 
   private langUrl = '/api/languages';
   private taskUrl = '/api/tasks';
+  private langIdUrl = '/api/languages/{id}';
 
   constructor(private http: Http) { }
 
@@ -20,4 +21,9 @@ export class TaskService {
       .map(res => res.json());
   }
 
+  getLanguageById() {
+    return this.http.get(this.langIdUrl)
+      .map(res => res.json());
+  }
+  
 }
