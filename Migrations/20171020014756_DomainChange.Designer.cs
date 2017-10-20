@@ -11,9 +11,10 @@ using System;
 namespace ProgrammingLog.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    partial class TaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171020014756_DomainChange")]
+    partial class DomainChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +30,11 @@ namespace ProgrammingLog.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int?>("ProgrammingTaskId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProgrammingTaskId");
 
                     b.ToTable("ProgrammingLanguages");
                 });
@@ -69,6 +74,13 @@ namespace ProgrammingLog.Migrations
                     b.ToTable("TaskLanguages");
                 });
 
+            modelBuilder.Entity("ProgrammingLog.Models.ProgrammingLanguage", b =>
+                {
+                    b.HasOne("ProgrammingLog.Models.ProgrammingTask")
+                        .WithMany("ProgrammingLanguages")
+                        .HasForeignKey("ProgrammingTaskId");
+                });
+
             modelBuilder.Entity("ProgrammingLog.Models.TaskLanguage", b =>
                 {
                     b.HasOne("ProgrammingLog.Models.ProgrammingLanguage", "Language")
@@ -77,7 +89,7 @@ namespace ProgrammingLog.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProgrammingLog.Models.ProgrammingTask", "Task")
-                        .WithMany("ProgrammingLanguages")
+                        .WithMany()
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

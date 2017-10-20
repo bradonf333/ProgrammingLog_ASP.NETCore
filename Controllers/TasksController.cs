@@ -14,14 +14,14 @@ namespace ProgrammingLog.Controllers
         private readonly IMapper mapper;
         public TasksController(TaskDbContext dbContext, IMapper mapper)
         {
-            this.mapper = mapper;
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         [HttpGet("/api/tasks")]
         public async Task<IEnumerable<ProgrammingTaskResource>> GetTasks()
         {
-            var tasks = await dbContext.Tasks.Include(l => l.Languages).ToListAsync();
+            var tasks = await dbContext.Tasks.Include(pt => pt.ProgrammingLanguages).ToListAsync();
             return mapper.Map<List<ProgrammingTask>, List<ProgrammingTaskResource>>(tasks);
         }
     }
