@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ProgrammingLog.Models;
 
 namespace ProgrammingLog.Controllers.Resources
@@ -14,11 +15,11 @@ namespace ProgrammingLog.Controllers.Resources
 
         public DateTime TaskDate { get; set; }
 
-        public ICollection<int> Languages { get; set; }
+        public IList<ProgrammingLanguage> Languages { get; set; }
 
         public ProgrammingTaskResource()
         {
-            Languages = new List<int>();
+            Languages = new List<ProgrammingLanguage>();
         }
 
     }

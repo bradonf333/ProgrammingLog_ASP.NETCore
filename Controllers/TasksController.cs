@@ -21,7 +21,10 @@ namespace ProgrammingLog.Controllers
         [HttpGet("/api/tasks")]
         public async Task<IEnumerable<ProgrammingTaskResource>> GetTasks()
         {
-            var tasks = await dbContext.Tasks.Include(pt => pt.ProgrammingLanguages).ToListAsync();
+            var tasks = await dbContext.Tasks
+                .Include(pt => pt.ProgrammingLanguages)
+                .ThenInclude(tl => tl.Language)
+                .ToListAsync();
             return mapper.Map<List<ProgrammingTask>, List<ProgrammingTaskResource>>(tasks);
         }
     }

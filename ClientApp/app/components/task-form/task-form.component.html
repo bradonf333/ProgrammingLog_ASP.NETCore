@@ -43,7 +43,7 @@
               <td>{{ task.hours | number:'.1-5'}}</td>
               <td>
                 <span *ngFor='let lang of task.languages; first as isFirst'>
-                  {{ lang }}
+                  {{ lang.language }}
                   <span *ngIf='isFirst && task.languages.length > 1'>,</span>
                 </span>
               </td>

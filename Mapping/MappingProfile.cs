@@ -12,9 +12,16 @@ namespace ProgrammingLog.Mapping
             // Domain to API Resource
             CreateMap<ProgrammingTask, ProgrammingTaskResource>()
             .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
-                pl => pl.LanguageId
+                tl => new ProgrammingLanguage { 
+                    Id = tl.Language.Id, 
+                    Language = tl.Language.Language 
+                    }
             )));
-            CreateMap<ProgrammingLanguage, KeyValuePairResource>();
+
+            // --This was mapping to get only the LanguageId not the language object
+            // .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
+            //     pl => pl.LanguageId
+            // )))
 
             // API Resource to Domain
         }
