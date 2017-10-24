@@ -11,6 +11,7 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { CounterComponent } from './components/counter/counter.component';
         FetchDataComponent,
         HomeComponent,
         TaskFormComponent,
-        WelcomeComponent
+        WelcomeComponent,
+        TaskListComponent
     ],
     imports: [
         CommonModule,
@@ -28,6 +30,7 @@ import { CounterComponent } from './components/counter/counter.component';
         RouterModule.forRoot([
             { path: 'welcome', component: WelcomeComponent},
             { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+            { path: 'tasks', component: TaskListComponent},
             { path: 'tasks/new', component: TaskFormComponent},           
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },

@@ -1,0 +1,39 @@
+<div class='panel panel-primary'>
+
+  <div class='panel-heading'>
+    <h3>{{pageTitle}}</h3>
+  </div>
+
+  <div class='panel-body'>
+
+    <form class='form-horizontal'>
+
+      <div class="table-responsive">
+        <table class="table" *ngIf='tasks && tasks.length'>
+          <thead>
+            <tr>
+              <th>Hours</th>
+              <th>Language(s)</th>
+              <th>Task Summary</th>
+              <th>Task Date</th>
+            </tr>
+            <tr *ngFor='let task of tasks'>
+              <td>{{ task.hours | number:'.1-5'}}</td>
+              <td>
+                <span *ngFor='let lang of task.languages; first as isFirst'>
+                  {{ lang.language }}
+                  <span *ngIf='isFirst && task.languages.length > 1'>,</span>
+                </span>
+              </td>
+              <td>{{ task.summary }}</td>
+              <td>{{ task.taskDate | date:'short' }}</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
