@@ -23,7 +23,7 @@ namespace ProgrammingLog.Controllers
         {
             var tasks = await dbContext.Tasks
                 .Include(pt => pt.ProgrammingLanguages)
-                .ThenInclude(tl => tl.Language)
+                    .ThenInclude(tl => tl.Language)
                 .ToListAsync();
             return mapper.Map<List<ProgrammingTask>, List<ProgrammingTaskResource>>(tasks);
         }

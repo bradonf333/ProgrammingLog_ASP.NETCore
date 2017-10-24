@@ -26,7 +26,7 @@ export class TaskFormComponent implements OnInit {
         this.tasks = tasks;
         console.log("Tasks", this.tasks);
       });
-      
+
   }
 
 }
