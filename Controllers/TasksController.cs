@@ -21,10 +21,27 @@ namespace ProgrammingLog.Controllers
         }
 
         [HttpPost]
-        // public async Task<IActionResult> CreateTask([FromBody] SaveTaskResource taskResource)
-        // {
+        public async Task<IActionResult> CreateTask([FromBody] ProgrammingTaskResource taskResource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // }
+            var task = mapper.Map<ProgrammingTaskResource, ProgrammingTask>(taskResource);
+
+            // task = await dbContext.Tasks
+            //     .Include(pt => pt.ProgrammingLanguages)
+            //         .ThenInclude(tl => tl.Language)
+            //     .SingleOrDefaultAsync(t => t.Id == task.Id);
+
+            dbContext.Add(task);
+            
+            await dbContext.SaveChangesAsync();
+
+            // var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
+            return Ok(task);
+        }
 
         [HttpGet]
         public async Task<IEnumerable<SaveProgrammingTaskResource>> GetTasks()

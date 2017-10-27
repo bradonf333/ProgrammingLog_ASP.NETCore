@@ -10,6 +10,7 @@ namespace ProgrammingLog.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
+            // CreateMap<Source, Destination>
             CreateMap<ProgrammingTask, SaveProgrammingTaskResource>()
             .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
                 tl => new ProgrammingLanguage { 
@@ -24,6 +25,26 @@ namespace ProgrammingLog.Mapping
             // )))
 
             // API Resource to Domain
+            // CreateMap<Source, Destination>
+            CreateMap<ProgrammingTaskResource, ProgrammingTask>()
+                .ForMember(pt => pt.Id, opt => opt.Ignore());
+                // .ForMember(pt => pt.ProgrammingLanguages, opt => opt.MapFrom(ptr => ptr.ProgrammingLanguages.Select(
+                //     tl => new TaskLanguage {
+                //         LanguageId = tl.Id
+                //     }
+                // )));
+                // .ForMember(pt => pt.ProgrammingLanguages, opt => opt.Ignore())
+                // .AfterMap((ptr, pt) =>
+                // {
+                //     var removedLanguages = pt.ProgrammingLanguages.Where(languages => !ptr.Languages.Contains(languages.Language));
+
+                //     foreach (var language in removedLanguages)
+                //     {
+                //         pt.ProgrammingLanguages.Remove(language);
+                //     }
+
+                //     var addedLanguages = ptr.Languages.Where(id => !pt.ProgrammingLanguages.Any(tl => tl.LanguageId == id))
+                // });
         }
     }
 }
