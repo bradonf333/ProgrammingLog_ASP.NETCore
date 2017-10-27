@@ -10,7 +10,7 @@ namespace ProgrammingLog.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
-            CreateMap<ProgrammingTask, ProgrammingTaskResource>()
+            CreateMap<ProgrammingTask, SaveProgrammingTaskResource>()
             .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
                 tl => new ProgrammingLanguage { 
                     Id = tl.Language.Id, 

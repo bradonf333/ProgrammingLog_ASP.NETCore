@@ -20,14 +20,20 @@ namespace ProgrammingLog.Controllers
             this.mapper = mapper;
         }
 
+        [HttpPost]
+        // public async Task<IActionResult> CreateTask([FromBody] SaveTaskResource taskResource)
+        // {
+
+        // }
+
         [HttpGet]
-        public async Task<IEnumerable<ProgrammingTaskResource>> GetTasks()
+        public async Task<IEnumerable<SaveProgrammingTaskResource>> GetTasks()
         {
             var tasks = await dbContext.Tasks
                 .Include(pt => pt.ProgrammingLanguages)
                     .ThenInclude(tl => tl.Language)
                 .ToListAsync();
-            return mapper.Map<List<ProgrammingTask>, List<ProgrammingTaskResource>>(tasks);
+            return mapper.Map<List<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
         }
 
         [HttpGet("{id}")]
@@ -38,7 +44,7 @@ namespace ProgrammingLog.Controllers
                     .ThenInclude(tl => tl.Language)
                 .SingleOrDefaultAsync(t => t.Id == id);
 
-            var taskResource = mapper.Map<ProgrammingTask, ProgrammingTaskResource>(task);
+            var taskResource = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
 
             return Ok(taskResource);
         }

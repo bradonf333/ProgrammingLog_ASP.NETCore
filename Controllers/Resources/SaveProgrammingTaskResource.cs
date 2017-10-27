@@ -5,7 +5,7 @@ using ProgrammingLog.Models;
 
 namespace ProgrammingLog.Controllers.Resources
 {
-    public class ProgrammingTaskResource
+    public class SaveProgrammingTaskResource
     {
         public double Hours { get; set; }
 
@@ -17,7 +17,7 @@ namespace ProgrammingLog.Controllers.Resources
 
         public IList<ProgrammingLanguage> Languages { get; set; }
 
-        public ProgrammingTaskResource()
+        public SaveProgrammingTaskResource()
         {
             Languages = new List<ProgrammingLanguage>();
         }
