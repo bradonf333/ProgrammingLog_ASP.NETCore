@@ -11,9 +11,10 @@ using System;
 namespace ProgrammingLog.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    partial class TaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171028185156_Make Task Description longer")]
+    partial class MakeTaskDescriptionlonger
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

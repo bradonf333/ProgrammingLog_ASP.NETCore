@@ -14,7 +14,7 @@ namespace ProgrammingLog.Models
         public double Hours { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(500)]
         public string Description { get; set; }
 
         [Required]

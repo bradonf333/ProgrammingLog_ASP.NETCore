@@ -16,11 +16,11 @@ namespace ProgrammingLog.Controllers.Resources
 
         public DateTime TaskDate { get; set; }
 
-        // public IList<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+        public IList<int> ProgrammingLanguages { get; set; }
 
-        // public ProgrammingTaskResource()
-        // {
-        //     ProgrammingLanguages = new List<ProgrammingLanguage>();
-        // }
+        public ProgrammingTaskResource()
+        {
+            ProgrammingLanguages = new List<int>();
+        }
     }
 }
