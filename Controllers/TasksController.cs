@@ -67,6 +67,27 @@ namespace ProgrammingLog.Controllers
             return mapper.Map<List<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTask(int id)
+        {
+            var task = await dbContext.Tasks
+                .Include(pt => pt.ProgrammingLanguages)
+                    .ThenInclude(tl => tl.Language)
+                .SingleOrDefaultAsync(t => t.Id == id);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Tasks.Remove(task);
+
+            await dbContext.SaveChangesAsync();
+
+            return Ok(id);
+
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTask(int id)
         {
