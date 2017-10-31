@@ -66,6 +66,39 @@ namespace ProgrammingLog.Controllers
                 .ToListAsync();
             return mapper.Map<List<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
         }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTask(int id, [FromBody] UpdateProgrammingTaskResource taskResource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var task = await dbContext.Tasks
+                .Include(pt => pt.ProgrammingLanguages)
+                    .ThenInclude(tl => tl.Language)
+                .SingleOrDefaultAsync(t => t.Id == id);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            mapper.Map<UpdateProgrammingTaskResource, ProgrammingTask>(taskResource, task);
+
+            await dbContext.SaveChangesAsync();
+
+            task = await dbContext.Tasks
+                .Include(pt => pt.ProgrammingLanguages)
+                    .ThenInclude(tl => tl.Language)
+                .SingleOrDefaultAsync(t => t.Id == id);
+
+            var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
+
+            return Ok(taskResult);
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
@@ -96,9 +129,9 @@ namespace ProgrammingLog.Controllers
                     .ThenInclude(tl => tl.Language)
                 .SingleOrDefaultAsync(t => t.Id == id);
 
-            var taskResource = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
+            var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
 
-            return Ok(taskResource);
+            return Ok(taskResult);
         }
     }
 }
