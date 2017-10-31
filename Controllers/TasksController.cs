@@ -28,20 +28,7 @@ namespace ProgrammingLog.Controllers
                 return BadRequest(ModelState);
             }
 
-            // works!!!!
-            foreach (var item in taskResource.ProgrammingLanguages)
-            {
-                Console.WriteLine("Language Id from body: " + item);
-            }
-
             var task = mapper.Map<ProgrammingTaskResource, ProgrammingTask>(taskResource);
-
-            // task = await dbContext.Tasks.SingleOrDefaultAsync(t => t.Id == task.Id);
-
-            // task = await dbContext.Tasks
-            //     .Include(pt => pt.ProgrammingLanguages)
-            //         .ThenInclude(tl => tl.Language)
-            //     .SingleOrDefaultAsync(t => t.Id == task.Id);
 
             dbContext.Add(task);
 
@@ -49,43 +36,26 @@ namespace ProgrammingLog.Controllers
 
             task = await dbContext.Tasks.SingleOrDefaultAsync(t => t.Id == task.Id);
 
-            /*
-             * This is working so far.
-             * I am able to add a Programming language to the task which is then returned in the response.
-             * The TaskLanguage isn't being saved to the database yet, but I at least have the info needed to do that.
-             */
-            foreach (var item in taskResource.ProgrammingLanguages)
+            foreach (var id in taskResource.ProgrammingLanguages)
             {
                 task.ProgrammingLanguages.Add(
-                    new TaskLanguage {
-                    TaskId = task.Id,
-                    LanguageId = item
-                });
+                    new TaskLanguage
+                    {
+                        TaskId = task.Id,
+                        LanguageId = id
+                    });
             }
 
-            Console.WriteLine("Task after saving: " + task.Id);
-            foreach (var item in task.ProgrammingLanguages)
-            {
-                Console.WriteLine("Languages after saving Task: " + item.LanguageId);
-            }
+            await dbContext.SaveChangesAsync();
 
-            // Console.WriteLine("Writing the Task here: " + task.Description);
-            // task.ProgrammingLanguages.
+            task = await dbContext.Tasks
+                .Include(pt => pt.ProgrammingLanguages)
+                    .ThenInclude(tl => tl.Language)
+                .SingleOrDefaultAsync(t => t.Id == task.Id);
 
-            // var taskResult = mapper.Map<ProgrammingTask, ProgrammingTaskResource>(task);
-            return Ok(task);
+            var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
+            return Ok(taskResult);
         }
-
-        // [HttpPost]
-        // public async Task<IActionResult> CreateTask([FromBody] ProgrammingTask task)
-        // {
-        //     if (!ModelState.IsValid)
-        //     {
-        //         return BadRequest(ModelState);
-        //     }
-
-        //     return Ok(task);
-        // }
 
         [HttpGet]
         public async Task<IEnumerable<SaveProgrammingTaskResource>> GetTasks()
