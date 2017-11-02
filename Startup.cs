@@ -31,6 +31,7 @@ namespace ProgrammingLog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper();
             services.AddDbContext<TaskDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default"))

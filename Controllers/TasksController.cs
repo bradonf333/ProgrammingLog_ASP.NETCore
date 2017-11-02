@@ -15,8 +15,10 @@ namespace ProgrammingLog.Controllers
         private readonly TaskDbContext dbContext;
         private readonly IMapper mapper;
         private readonly ITaskRepository repository;
-        public TasksController(TaskDbContext dbContext, IMapper mapper, ITaskRepository repository)
+        private readonly IUnitOfWork unitOfWork;
+        public TasksController(TaskDbContext dbContext, IMapper mapper, ITaskRepository repository, IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
             this.repository = repository;
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -34,7 +36,7 @@ namespace ProgrammingLog.Controllers
 
             repository.Add(task);
 
-            await dbContext.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             task = await repository.GetTaskAsync(task.Id);
 
@@ -48,7 +50,7 @@ namespace ProgrammingLog.Controllers
                     });
             }
 
-            await dbContext.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             task = await repository.GetTaskAsync(task.Id);
 
@@ -80,7 +82,7 @@ namespace ProgrammingLog.Controllers
 
             mapper.Map<UpdateProgrammingTaskResource, ProgrammingTask>(taskResource, task);
 
-            await dbContext.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             task = await repository.GetTaskAsync(id);
 
@@ -102,7 +104,7 @@ namespace ProgrammingLog.Controllers
 
             repository.Remove(task);
 
-            await dbContext.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             return Ok(id);
 
@@ -111,7 +113,7 @@ namespace ProgrammingLog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTask(int id)
         {
-            var task = await repository.GetTaskAsync(id);;
+            var task = await repository.GetTaskAsync(id); ;
 
             var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
 
