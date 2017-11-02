@@ -30,6 +30,7 @@ namespace ProgrammingLog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddAutoMapper();
             services.AddDbContext<TaskDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default"))

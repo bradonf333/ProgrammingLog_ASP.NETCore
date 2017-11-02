@@ -14,8 +14,10 @@ namespace ProgrammingLog.Controllers
     {
         private readonly TaskDbContext dbContext;
         private readonly IMapper mapper;
-        public TasksController(TaskDbContext dbContext, IMapper mapper)
+        private readonly ITaskRepository repository;
+        public TasksController(TaskDbContext dbContext, IMapper mapper, ITaskRepository repository)
         {
+            this.repository = repository;
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
@@ -30,11 +32,11 @@ namespace ProgrammingLog.Controllers
 
             var task = mapper.Map<ProgrammingTaskResource, ProgrammingTask>(taskResource);
 
-            dbContext.Add(task);
+            repository.Add(task);
 
             await dbContext.SaveChangesAsync();
 
-            task = await dbContext.Tasks.SingleOrDefaultAsync(t => t.Id == task.Id);
+            task = await repository.GetTaskAsync(task.Id);
 
             foreach (var id in taskResource.ProgrammingLanguages)
             {
@@ -48,25 +50,19 @@ namespace ProgrammingLog.Controllers
 
             await dbContext.SaveChangesAsync();
 
-            task = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .SingleOrDefaultAsync(t => t.Id == task.Id);
+            task = await repository.GetTaskAsync(task.Id);
 
             var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
             return Ok(taskResult);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SaveProgrammingTaskResource>> GetTasks()
+        public async Task<IList<SaveProgrammingTaskResource>> GetTasks()
         {
-            var tasks = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .ToListAsync();
-            return mapper.Map<List<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
+            var tasks = await repository.GetAllTasksAsync();
+            return mapper.Map<IList<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
         }
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTask(int id, [FromBody] UpdateProgrammingTaskResource taskResource)
         {
@@ -75,10 +71,7 @@ namespace ProgrammingLog.Controllers
                 return BadRequest(ModelState);
             }
 
-            var task = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .SingleOrDefaultAsync(t => t.Id == id);
+            var task = await repository.GetTaskAsync(id);
 
             if (task == null)
             {
@@ -89,10 +82,7 @@ namespace ProgrammingLog.Controllers
 
             await dbContext.SaveChangesAsync();
 
-            task = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .SingleOrDefaultAsync(t => t.Id == id);
+            task = await repository.GetTaskAsync(id);
 
             var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
 
@@ -103,17 +93,14 @@ namespace ProgrammingLog.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .SingleOrDefaultAsync(t => t.Id == id);
+            var task = await repository.GetTaskAsync(id);
 
             if (task == null)
             {
                 return NotFound();
             }
 
-            dbContext.Tasks.Remove(task);
+            repository.Remove(task);
 
             await dbContext.SaveChangesAsync();
 
@@ -124,10 +111,7 @@ namespace ProgrammingLog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTask(int id)
         {
-            var task = await dbContext.Tasks
-                .Include(pt => pt.ProgrammingLanguages)
-                    .ThenInclude(tl => tl.Language)
-                .SingleOrDefaultAsync(t => t.Id == id);
+            var task = await repository.GetTaskAsync(id);;
 
             var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
 
