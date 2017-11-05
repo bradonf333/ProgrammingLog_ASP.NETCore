@@ -25,10 +25,7 @@
               <tr *ngFor='let l of languages' class='col-md-6'>
                 <td>
                   <label>
-                    <input class='form-check-input' 
-                           type='checkbox' 
-                           id='lang{{ l.id }}' 
-                           (change)="onLanguageToggle(l.id, $event)">  {{ l.language }}
+                    <input class='form-check-input' type='checkbox' id='lang{{ l.id }}' (change)="onLanguageToggle(l.id, $event)"> {{ l.language }}
                   </label>
                 </td>
               </tr>
@@ -45,21 +42,22 @@
       <div class='form-group'>
         <label for='hours' class='col-md-2 control-label'>Hours</label>
         <div class='col-md-4'>
-          <input type='number' class='form-control' id='hours'>
+          <input type='number' class='form-control' id='taskHours' [(ngModel)]='task.hours' name='taskHours'>
         </div>
       </div>
 
       <div class='form-group'>
         <label for='datetime' class='col-md-2 control-label'>Date of Task</label>
         <div class='col-md-4'>
-          <input type='datetime-local' class='form-control' id='datetime'>
+          <input type='datetime-local' class='form-control' id='taskDate' [(ngModel)]='task.date' name='taskDate'>
         </div>
       </div>
 
       <div class='form-group'>
         <label for='description' class='col-md-2 control-label'>Description</label>
         <div class='col-md-4'>
-          <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='description' rows='4'></textarea>
+          <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='taskDescription' rows='4'
+            [(ngModel)]='task.description' name='taskDescription'></textarea>
           <small class="form-text text-muted">Keep under 500 characters</small>
         </div>
       </div>
@@ -67,7 +65,8 @@
       <div class='form-group'>
         <label for='description' class='col-md-2 control-label'>Summary</label>
         <div class='col-md-4'>
-          <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='sumamry' rows='2'></textarea>
+          <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='taskSummary' rows='2' 
+          [(ngModel)]='task.summary' name='taskSummary'></textarea>
           <small class="form-text text-muted">Keep under 100 characters</small>
         </div>
       </div>
