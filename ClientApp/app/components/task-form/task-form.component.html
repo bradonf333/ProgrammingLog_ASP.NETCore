@@ -6,27 +6,75 @@
 
   <div class='panel-body'>
 
+    <span>
+      <br>{{ task | json }}
+      <br>
+    </span>
+
     <form class='form-horizontal'>
+
       <div class='row'>
-        <h3 class='col-md-4'>Available Languages</h3>
+        <h3 class='col-md-4'>Languages</h3>
       </div>
 
-      <div class='col-md-3'>
-        <div class='row' *ngFor='let l of languages'>
-          <label class='form-check-label'>
-            <input class='form-check-input' type='checkbox' id='lang{{ l.id }}'> {{ l.language }}
-          </label>
+      <div class='form-group'>
+
+        <div class='table-responsive col-md-4'>
+          <table class='table' *ngIf='languages && languages.length'>
+            <tbody>
+              <tr *ngFor='let l of languages' class='col-md-6'>
+                <td>
+                  <label>
+                    <input class='form-check-input' 
+                           type='checkbox' 
+                           id='lang{{ l.id }}' 
+                           (change)="onLanguageToggle(l.id, $event)">  {{ l.language }}
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class='row'>
+        <h3 class='col-md-4'>Task Details</h3>
+      </div>
+
+      <div class='form-group'>
+        <label for='hours' class='col-md-2 control-label'>Hours</label>
+        <div class='col-md-4'>
+          <input type='number' class='form-control' id='hours'>
         </div>
       </div>
 
-      <div class='row'>
-        <div class='col-md-6'>
-          <br>
+      <div class='form-group'>
+        <label for='datetime' class='col-md-2 control-label'>Date of Task</label>
+        <div class='col-md-4'>
+          <input type='datetime-local' class='form-control' id='datetime'>
         </div>
       </div>
-      <div class='row'>
-        <div class='col-md-6'>
-          <br>
+
+      <div class='form-group'>
+        <label for='description' class='col-md-2 control-label'>Description</label>
+        <div class='col-md-4'>
+          <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='description' rows='4'></textarea>
+          <small class="form-text text-muted">Keep under 500 characters</small>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <label for='description' class='col-md-2 control-label'>Summary</label>
+        <div class='col-md-4'>
+          <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='sumamry' rows='2'></textarea>
+          <small class="form-text text-muted">Keep under 100 characters</small>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='col-md-offset-2 col-md-3'>
+          <button type='submit' class='btn btn-primary'>Submit</button>
         </div>
       </div>
 

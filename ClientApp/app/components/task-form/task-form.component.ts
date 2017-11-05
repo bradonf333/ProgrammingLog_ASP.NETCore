@@ -10,7 +10,9 @@ export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
   languages: any[];
-  tasks: any[];
+  task: any = {
+    languages: []
+  };
 
   constructor(private taskService: TaskService) { }
 
@@ -20,13 +22,16 @@ export class TaskFormComponent implements OnInit {
         this.languages = languages;
         console.log("Languages", this.languages);
       });
+  }
 
-    this.taskService.getTasks()
-      .subscribe(tasks => {
-        this.tasks = tasks;
-        console.log("Tasks", this.tasks);
-      });
-
+  onLanguageToggle(langId: number, $event: any) {
+    if($event.target.checked) {
+      this.task.languages.push(langId);
+    }
+    else {
+      var index = this.task.languages.indexOf(langId);
+      this.task.languages.splice(index, 1);
+    }
   }
 
 }
