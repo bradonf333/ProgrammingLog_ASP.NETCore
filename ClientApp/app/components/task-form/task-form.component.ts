@@ -29,7 +29,7 @@ export class TaskFormComponent implements OnInit {
       this.task.programmingLanguages.push(langId);
     }
     else {
-      var index = this.task.languages.indexOf(langId);
+      var index = this.task.programmingLanguages.indexOf(langId);
       this.task.programmingLanguages.splice(index, 1);
     }
   }
