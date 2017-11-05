@@ -52,7 +52,7 @@ namespace ProgrammingLog.Controllers
 
             await unitOfWork.CompleteAsync();
 
-            task = await repository.GetTaskAsync(task.Id);
+            task = await repository.GetTaskAsync(task.Id); // Is this one necessary??? Maybe it is because the task above didn't have the TaskLanguages??
 
             var taskResult = mapper.Map<ProgrammingTask, SaveProgrammingTaskResource>(task);
             return Ok(taskResult);

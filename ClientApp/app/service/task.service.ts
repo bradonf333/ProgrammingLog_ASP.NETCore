@@ -25,5 +25,10 @@ export class TaskService {
     return this.http.get(this.langIdUrl)
       .map(res => res.json());
   }
+
+  createTask(task: any) {
+    return this.http.post(this.taskUrl, task)
+      .map(res => res.json());
+  }
   
 }

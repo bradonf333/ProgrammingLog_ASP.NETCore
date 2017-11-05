@@ -11,7 +11,7 @@
       <br>
     </span>
 
-    <form class='form-horizontal'>
+    <form class='form-horizontal' (ngSubmit)='submit()'>
 
       <div class='row'>
         <h3 class='col-md-4'>Languages</h3>
@@ -49,7 +49,7 @@
       <div class='form-group'>
         <label for='datetime' class='col-md-2 control-label'>Date of Task</label>
         <div class='col-md-4'>
-          <input type='datetime-local' class='form-control' id='taskDate' [(ngModel)]='task.date' name='taskDate'>
+          <input type='datetime-local' class='form-control' id='taskDate' [(ngModel)]='task.taskDate' name='taskDate'>
         </div>
       </div>
 
