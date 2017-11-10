@@ -21,6 +21,11 @@ export class TaskService {
       .map(res => res.json());
   }
 
+  getTask(id: number) {
+    return this.http.get(this.taskUrl + '/' + id)
+      .map(res => res.json());
+  }
+
   getLanguageById() {
     return this.http.get(this.langIdUrl)
       .map(res => res.json());
@@ -30,5 +35,5 @@ export class TaskService {
     return this.http.post(this.taskUrl, task)
       .map(res => res.json());
   }
-  
+
 }
