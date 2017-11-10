@@ -1,9 +1,6 @@
-import { PlatformState } from '@angular/platform-server';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/Observable/forkJoin';
 
 @Component({
   selector: 'app-task-form',
@@ -25,31 +22,11 @@ export class TaskFormComponent implements OnInit {
   ) {
     route.params.subscribe(p => {
       this.task.id = +p['id'];
-    })
+    }) 
   }
 
   ngOnInit() {
-
-    var sources = [
-      this.taskService.getLanguages()
-    ];
-
-    if (this.task.id) {
-      sources.push(this.taskService.getTask(this.task.id));
-    }
-
-    Observable.forkJoin(sources).subscribe(data => {
-      if (this.task.id) {
-        this.task = data[0];
-      }
-      this.languages = data[1];
-    });
-
-    this.taskService.getTask(this.task.id)
-      .subscribe(t => {
-        this.task = t;
-      });
-
+    
     this.taskService.getLanguages()
       .subscribe(languages => {
         this.languages = languages;
