@@ -1,3 +1,4 @@
+import { ProgrammingTask } from './../app/models/task';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,7 +12,12 @@ export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
   languages: any[];
-  task: any = {
+  task: ProgrammingTask = {
+    id: 0,
+    hours: '',
+    description: '',
+    summary: '',
+    taskDate: '',
     programmingLanguages: []
   };
 
