@@ -9,6 +9,55 @@
     <span>
       <br>{{ task | json }}
       <br>
+      <br>
+      <br>
+      <b>TaskId:</b>{{ task.id }}
+      <br>
+      <b>TaskHours:</b> {{ task.hours }}
+      <br>
+      <b>TaskDescription:</b> {{ task.description }}
+      <br>
+      <b>TaskSummary: </b>{{ task.summary }}
+      <br>
+      <b>TaskDate: </b>{{ task.taskDate }}
     </span>
+
+    <br>
+    <br>
+    <span>Task Languages<br>
+      <div *ngFor='let pl of task.languages'>
+        <span> {{ pl.id }} </span>
+        <span> {{ pl.language }} </span>
+      </div>
+      <div>ProgrammingLanguages</div>
+      <div *ngFor='let pl of task.programmingLanguages'>
+        <span> {{ pl }} </span>
+      </div>
+    </span>
+
+    <form class='form-horizontal' (ngSubmit)='submit()' #taskForm="ngForm">
+      <div class='row'>
+        <h3 class='col-md-4'>Languages</h3>
+      </div>
+      <div class='form-group'>
+
+        <div class='table-responsive col-md-4'>
+          <table class='table' *ngIf='languages && languages.length'>
+            <tbody>
+              <tr *ngFor='let l of languages' class='col-md-6'>
+                <td>
+                  <label>
+                    <input class='form-check-input' type='checkbox' id='lang{{ l.id }}' (change)="onLanguageToggle(l.id, $event)"
+                    > {{ l.language }}
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </form>
+
   </div>
 </div>
