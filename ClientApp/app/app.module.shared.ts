@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskEditComponent } from './components/task-form/task-edit.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { TaskListComponent } from './components/task-list/task-list.component';
         HomeComponent,
         TaskFormComponent,
         WelcomeComponent,
-        TaskListComponent
+        TaskListComponent,
+        TaskEditComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +34,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
             { path: '', redirectTo: 'welcome', pathMatch: 'full' },
             { path: 'tasks', component: TaskListComponent},
             { path: 'tasks/new', component: TaskFormComponent},           
-            { path: 'tasks/:id', component: TaskFormComponent},           
+            { path: 'tasks/:id', component: TaskEditComponent},           
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
