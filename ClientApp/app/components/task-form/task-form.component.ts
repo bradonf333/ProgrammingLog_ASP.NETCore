@@ -1,3 +1,4 @@
+import { NewProgrammingTask } from './../app/models/newTask';
 import { ProgrammingTask } from './../app/models/task';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
   languages: any[];
-  task: ProgrammingTask = {
+  task: NewProgrammingTask = {
     id: 0,
     hours: '',
     description: '',
@@ -21,15 +22,7 @@ export class TaskFormComponent implements OnInit {
     programmingLanguages: []
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private taskService: TaskService
-  ) {
-    route.params.subscribe(p => {
-      this.task.id = +p['id'];
-    }) 
-  }
+  constructor(private taskService: TaskService) {  }
 
   ngOnInit() {
     

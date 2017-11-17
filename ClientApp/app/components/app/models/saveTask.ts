@@ -6,5 +6,5 @@ export interface SaveProgrammingTask {
     description: string,
     summary: string,
     taskDate: string,
-    programmingLanguages: KeyValuePair[]
+    languages: KeyValuePair[]
 }

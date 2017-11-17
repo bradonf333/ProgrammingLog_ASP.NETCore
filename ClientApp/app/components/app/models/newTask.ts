@@ -1,8 +1,8 @@
-export interface ProgrammingTask {
+export interface NewProgrammingTask {
     id: number,
     hours: string,
     description: string,
     summary: string,
     taskDate: string,
-    languages: number[]
+    programmingLanguages: number[]
 }

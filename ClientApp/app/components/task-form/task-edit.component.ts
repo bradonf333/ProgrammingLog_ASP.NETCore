@@ -1,3 +1,4 @@
+import { KeyValuePair } from './../app/models/keyValuePair';
 import * as _ from 'underscore';
 import { TaskService } from './../../service/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,15 +14,16 @@ import { SaveProgrammingTask } from '../app/models/saveTask';
 })
 export class TaskEditComponent implements OnInit {
   pageTitle: string = "Edit a Programming Task";
-  languages: any[];
-  task: ProgrammingTask = {
+  languages: KeyValuePair[];
+  task: SaveProgrammingTask = {
     id: 0,
     hours: '',
     description: '',
     summary: '',
     taskDate: '',
-    programmingLanguages: []
+    languages: []
   };
+  taskLanguages: number[];
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +50,7 @@ export class TaskEditComponent implements OnInit {
     this.taskService.getTask(id)
       .subscribe(t => {
         this.task = t;
+        this.getLanguageIds(this.task);
       });
 
     this.taskService.getLanguages()
@@ -61,13 +64,18 @@ export class TaskEditComponent implements OnInit {
   // Trying to see if this can be passed a SaveTask rather than a regular task. Also need to see if i can make the programmingLanguages 
   // a key value pair on the SaveTask, then this would be similar to the vega app.
   //
-  setTask(t: ProgrammingTask) {
+  setTask(t: SaveProgrammingTask) {
     this.task.id = t.id;
     this.task.description = t.description;
     this.task.hours = t.hours;
     this.task.summary = t.summary;
     this.task.taskDate = t.taskDate;
-    this.task.programmingLanguages = _.pluck(t.programmingLanguages, "id");
+    this.task.languages = t.languages;
+  }
+
+  getLanguageIds(t: SaveProgrammingTask) {
+    this.taskLanguages = t.languages.map(({ id }) => id);
+    // console.log("TaskLanguagesArray", this.taskLanguages);
   }
 }
 
