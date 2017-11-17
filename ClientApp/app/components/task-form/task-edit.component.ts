@@ -77,5 +77,23 @@ export class TaskEditComponent implements OnInit {
     this.taskLanguages = t.languages.map(({ id }) => id);
     // console.log("TaskLanguagesArray", this.taskLanguages);
   }
+
+  /* Right now the task is a language, which is a key value pair. 
+   * Maybe create a function that will grab the key value pair from the languages (maybe the service)
+   * using the id that is given?
+   * 
+   * Maybe the reverse of the getLanguageIds function. Instead of mapping an id from the key value, map the key value from the id
+   *
+   */
+  
+  // onLanguageToggle(langId: number, $event: any) {
+  //   if ($event.target.checked) {
+  //     this.task.programmingLanguages.push(langId);
+  //   }
+  //   else {
+  //     var index = this.task.programmingLanguages.indexOf(langId);
+  //     this.task.programmingLanguages.splice(index, 1);
+  //   }
+  // }
 }
 
