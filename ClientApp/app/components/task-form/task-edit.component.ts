@@ -15,7 +15,8 @@ import { SaveProgrammingTask } from '../app/models/saveTask';
 export class TaskEditComponent implements OnInit {
   pageTitle: string = "Edit a Programming Task";
   languages: KeyValuePair[];
-  task: SaveProgrammingTask = {
+
+  mainTask: ProgrammingTask = {
     id: 0,
     hours: '',
     description: '',
@@ -23,7 +24,6 @@ export class TaskEditComponent implements OnInit {
     taskDate: '',
     languages: []
   };
-  taskLanguages: number[];
 
   constructor(
     private route: ActivatedRoute,
@@ -41,16 +41,9 @@ export class TaskEditComponent implements OnInit {
     // this.task.id = id;
 
     //  --Note that this doesnt get the languages property... Probably because i am not setting it in the setTask method below??
-    // this.taskService.getTask(id)
-    //   .subscribe(task => {
-    //     this.setTask(task);
-    //   });
-
-    //  --Note that this DOES get the languages property... Probably cause its just mapping the task from the getTask service.
     this.taskService.getTask(id)
-      .subscribe(t => {
-        this.task = t;
-        this.getLanguageIds(this.task);
+      .subscribe(task => {
+        this.setTask(task);
       });
 
     this.taskService.getLanguages()
@@ -60,34 +53,20 @@ export class TaskEditComponent implements OnInit {
       });
   }
 
-  //
-  // Trying to see if this can be passed a SaveTask rather than a regular task. Also need to see if i can make the programmingLanguages 
-  // a key value pair on the SaveTask, then this would be similar to the vega app.
-  //
-  setTask(t: SaveProgrammingTask) {
-    this.task.id = t.id;
-    this.task.description = t.description;
-    this.task.hours = t.hours;
-    this.task.summary = t.summary;
-    this.task.taskDate = t.taskDate;
-    this.task.languages = t.languages;
-  }
-
   /**
-   * Takes the Task.Languages KeyValuePairs and maps only the Id values.
+   * Pass in a SaveProgramminTask and map to a ProgrammingTask.
+   * Main objective is to take the KeyValuePairs of SaveProgrammingTask.Languages 
+   * and map just the Id values to the ProgrammingTask.Languages array.
+   * @param t 
    */
-  getLanguageIds(t: SaveProgrammingTask) {
-    this.taskLanguages = t.languages.map(({ id }) => id);
-    // console.log("TaskLanguagesArray", this.taskLanguages);
+  setTask(saveTask: SaveProgrammingTask) {
+    this.mainTask.id = saveTask.id;
+    this.mainTask.description = saveTask.description;
+    this.mainTask.hours = saveTask.hours;
+    this.mainTask.summary = saveTask.summary;
+    this.mainTask.taskDate = saveTask.taskDate;
+    this.mainTask.languages = saveTask.languages.map(({ id }) => id);
   }
-
-  /* Right now the task is a language, which is a key value pair. 
-   * Maybe create a function that will grab the key value pair from the languages (maybe the service)
-   * using the id that is given?
-   * 
-   * Maybe the reverse of the getLanguageIds function. Instead of mapping an id from the key value, map the key value from the id
-   *
-   */
 
   // onLanguageToggle(langId: number, $event: any) {
   //   if ($event.target.checked) {

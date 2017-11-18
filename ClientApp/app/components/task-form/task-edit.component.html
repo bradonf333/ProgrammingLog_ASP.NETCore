@@ -7,23 +7,21 @@
   <div class='panel-body'>
 
     <span>
-      <br>{{ task | json }}
+      <!-- <br>{{ task | json }} -->
       <br>
+      <b>TaskId:          </b>{{ mainTask.id }}
       <br>
+      <b>TaskHours:       </b> {{ mainTask.hours }}
       <br>
-      <b>TaskId:</b>{{ task.id }}
+      <b>TaskDescription: </b> {{ mainTask.description }}
       <br>
-      <b>TaskHours:</b> {{ task.hours }}
+      <b>TaskSummary:     </b>{{ mainTask.summary }}
       <br>
-      <b>TaskDescription:</b> {{ task.description }}
+      <b>TaskDate:        </b>{{ mainTask.taskDate }}
       <br>
-      <b>TaskSummary: </b>{{ task.summary }}
+      <b>TaskLanguages:   </b>{{ mainTask.languages | json }}
       <br>
-      <b>TaskDate: </b>{{ task.taskDate }}
-      <br>
-      <b>TaskLanguages: </b>{{ taskLanguages | json }}
-      <br>
-      <b>Task.Languages: </b>{{ task.languages | json }}
+      <br>{{ mainTask | json }}
     </span>
 
     <form class='form-horizontal' (ngSubmit)='submit()' #taskForm="ngForm">
@@ -39,7 +37,7 @@
                 <td>
                   <label>
                     <input class='form-check-input' type='checkbox' id='lang{{ l.id }}' (change)="onLanguageToggle(l.id, $event)"
-                    [checked]="taskLanguages.includes(l.id)"> {{ l.language }}
+                    [checked]="mainTask.languages.includes(l.id)"> {{ l.language }}
                   </label>
                 </td>
               </tr>
@@ -56,7 +54,7 @@
       <div class='form-group'>
         <label for='hours' class='col-md-2 control-label'>Hours</label>
         <div class='col-md-4'>
-          <input type='number' class='form-control' id='taskHours' [(ngModel)]='task.hours' name='taskHours' required #taskHours="ngModel">
+          <input type='number' class='form-control' id='taskHours' [(ngModel)]='mainTask.hours' name='taskHours' required #taskHours="ngModel">
           <div class='alert alert-danger' *ngIf='taskHours.touched && !taskHours.valid'>Please enter the number of Hours for the Task</div>
         </div>
       </div>
@@ -64,7 +62,7 @@
       <div class='form-group'>
         <label for='datetime' class='col-md-2 control-label'>Date of Task</label>
         <div class='col-md-4'>
-          <input type='datetime-local' class='form-control' id='taskDate' [(ngModel)]='task.taskDate' name='taskDate' required #taskDate="ngModel">
+          <input type='datetime-local' class='form-control' id='taskDate' [(ngModel)]='mainTask.taskDate' name='taskDate' required #taskDate="ngModel">
           <div class='alert alert-danger' *ngIf='taskDate.touched && !taskDate.valid'>Please enter the Date for the Task</div>
         </div>
       </div>
@@ -73,7 +71,7 @@
         <label for='description' class='col-md-2 control-label'>Description</label>
         <div class='col-md-4'>
           <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='taskDescription' rows='4'
-            [(ngModel)]='task.description' name='taskDescription' required #taskDescription="ngModel"></textarea>
+            [(ngModel)]='mainTask.description' name='taskDescription' required #taskDescription="ngModel"></textarea>
           <small class="form-text text-muted">Keep under 500 characters</small>
           <div class='alert alert-danger' *ngIf='taskDescription.touched && !taskDescription.valid'>Please enter a Description for the Task</div>          
         </div>
@@ -83,7 +81,7 @@
         <label for='description' class='col-md-2 control-label'>Summary</label>
         <div class='col-md-4'>
           <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='taskSummary' rows='2'
-            [(ngModel)]='task.summary' name='taskSummary' required #taskSummary="ngModel"></textarea>
+            [(ngModel)]='mainTask.summary' name='taskSummary' required #taskSummary="ngModel"></textarea>
           <small class="form-text text-muted">Keep under 100 characters</small>
           <div class='alert alert-danger' *ngIf='taskSummary.touched && !taskSummary.valid'>Please enter a Summary for the Task</div>                    
         </div>
