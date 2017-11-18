@@ -44,7 +44,7 @@ export class TaskFormComponent implements OnInit {
 
   submit() {
     this.taskService.createTask(this.task)
-      .subscribe(t => console.log(t));
+      .subscribe(t => alert("Successfully created task"));
   }
 
 }
