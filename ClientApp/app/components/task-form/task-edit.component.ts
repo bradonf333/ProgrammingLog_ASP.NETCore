@@ -68,14 +68,14 @@ export class TaskEditComponent implements OnInit {
     this.mainTask.languages = saveTask.languages.map(({ id }) => id);
   }
 
-  // onLanguageToggle(langId: number, $event: any) {
-  //   if ($event.target.checked) {
-  //     this.task.programmingLanguages.push(langId);
-  //   }
-  //   else {
-  //     var index = this.task.programmingLanguages.indexOf(langId);
-  //     this.task.programmingLanguages.splice(index, 1);
-  //   }
-  // }
+  onLanguageToggle(langId: number, $event: any) {
+    if ($event.target.checked) {
+      this.mainTask.languages.push(langId);
+    }
+    else {
+      var index = this.mainTask.languages.indexOf(langId);
+      this.mainTask.languages.splice(index, 1);
+    }
+  }
 }
 
