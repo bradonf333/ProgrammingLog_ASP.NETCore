@@ -36,4 +36,9 @@ export class TaskService {
       .map(res => res.json());
   }
 
+  updateTask(task: any) {
+    return this.http.put(this.taskUrl + '/' + task.id, task)
+      .map(res => res.json);
+  }
+
 }

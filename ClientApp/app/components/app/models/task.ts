@@ -4,5 +4,5 @@ export interface ProgrammingTask {
     description: string,
     summary: string,
     taskDate: string,
-    languages: number[]
+    programmingLanguages: number[]
 }

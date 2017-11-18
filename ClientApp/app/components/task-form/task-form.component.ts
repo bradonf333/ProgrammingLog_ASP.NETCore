@@ -1,4 +1,3 @@
-import { NewProgrammingTask } from './../app/models/newTask';
 import { ProgrammingTask } from './../app/models/task';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +12,7 @@ export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
   languages: any[];
-  task: NewProgrammingTask = {
+  task: ProgrammingTask = {
     id: 0,
     hours: '',
     description: '',

@@ -19,7 +19,7 @@
       <br>
       <b>TaskDate:        </b>{{ mainTask.taskDate }}
       <br>
-      <b>TaskLanguages:   </b>{{ mainTask.languages | json }}
+      <b>TaskLanguages:   </b>{{ mainTask.programmingLanguages | json }}
       <br>
       <br>{{ mainTask | json }}
     </span>
@@ -37,7 +37,7 @@
                 <td>
                   <label>
                     <input class='form-check-input' type='checkbox' id='lang{{ l.id }}' (change)="onLanguageToggle(l.id, $event)"
-                    [checked]="mainTask.languages.includes(l.id)"> {{ l.language }}
+                    [checked]="mainTask.programmingLanguages.includes(l.id)"> {{ l.language }}
                   </label>
                 </td>
               </tr>

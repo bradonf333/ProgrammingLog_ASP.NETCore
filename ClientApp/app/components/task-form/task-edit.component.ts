@@ -1,5 +1,5 @@
-import { KeyValuePair } from './../app/models/keyValuePair';
 import * as _ from 'underscore';
+import { KeyValuePair } from './../app/models/keyValuePair';
 import { TaskService } from './../../service/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProgrammingTask } from './../app/models/task';
@@ -22,7 +22,7 @@ export class TaskEditComponent implements OnInit {
     description: '',
     summary: '',
     taskDate: '',
-    languages: []
+    programmingLanguages: []
   };
 
   constructor(
@@ -38,7 +38,7 @@ export class TaskEditComponent implements OnInit {
 
     let id = +this.route.snapshot.params['id'];
     this.pageTitle += `: ${id}`;
-    // this.task.id = id;
+    this.mainTask.id = id;
 
     //  --Note that this doesnt get the languages property... Probably because i am not setting it in the setTask method below??
     this.taskService.getTask(id)
@@ -60,22 +60,26 @@ export class TaskEditComponent implements OnInit {
    * @param t 
    */
   setTask(saveTask: SaveProgrammingTask) {
-    this.mainTask.id = saveTask.id;
     this.mainTask.description = saveTask.description;
     this.mainTask.hours = saveTask.hours;
     this.mainTask.summary = saveTask.summary;
     this.mainTask.taskDate = saveTask.taskDate;
-    this.mainTask.languages = saveTask.languages.map(({ id }) => id);
+    this.mainTask.programmingLanguages = saveTask.languages.map(({ id }) => id);
   }
 
   onLanguageToggle(langId: number, $event: any) {
     if ($event.target.checked) {
-      this.mainTask.languages.push(langId);
+      this.mainTask.programmingLanguages.push(langId);
     }
     else {
-      var index = this.mainTask.languages.indexOf(langId);
-      this.mainTask.languages.splice(index, 1);
+      var index = this.mainTask.programmingLanguages.indexOf(langId);
+      this.mainTask.programmingLanguages.splice(index, 1);
     }
+  }
+
+  submit() {
+    this.taskService.updateTask(this.mainTask)
+      .subscribe(t => alert("The Task has been successfully updated!"));
   }
 }
 
