@@ -79,7 +79,7 @@ export class TaskEditComponent implements OnInit {
 
   submit() {
     this.taskService.updateTask(this.mainTask)
-      .subscribe(t => alert("The Task has been successfully updated!"));
+      .subscribe(t => alert("The Task Id: " + this.mainTask.id + " has been successfully updated!"));
   }
 }
 
