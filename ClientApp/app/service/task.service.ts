@@ -41,4 +41,9 @@ export class TaskService {
       .map(res => res.json);
   }
 
+  deleteTask(id: number) {
+    return this.http.delete(this.taskUrl + '/' + id)
+      .map(res => res.json);
+  }
+
 }

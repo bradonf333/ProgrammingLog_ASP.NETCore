@@ -81,5 +81,14 @@ export class TaskEditComponent implements OnInit {
     this.taskService.updateTask(this.mainTask)
       .subscribe(t => alert("The Task Id: " + this.mainTask.id + " has been successfully updated!"));
   }
+
+  deleteTask() {
+    if (confirm("Are you sure?")) {
+      this.taskService.deleteTask(this.mainTask.id)
+        .subscribe(t => {
+          this.router.navigate(['/tasks']);
+        });
+    }
+  }
 }
 

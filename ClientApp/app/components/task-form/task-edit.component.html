@@ -90,6 +90,7 @@
       <div class='form-group'>
         <div class='col-md-offset-2 col-md-3'>
           <button type='submit' class='btn btn-primary' [disabled]="!taskForm.valid">Update Task</button>
+          <button type='button' class='btn btn-danger' (click)="deleteTask()">Delete Task</button>
         </div>
       </div>
 
