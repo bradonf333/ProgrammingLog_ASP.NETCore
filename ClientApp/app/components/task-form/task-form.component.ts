@@ -21,7 +21,7 @@ export class TaskFormComponent implements OnInit {
     programmingLanguages: []
   };
 
-  constructor(private taskService: TaskService) {  }
+  constructor(private taskService: TaskService, private router: Router) {  }
 
   ngOnInit() {
     
@@ -44,7 +44,10 @@ export class TaskFormComponent implements OnInit {
 
   submit() {
     this.taskService.createTask(this.task)
-      .subscribe(t => alert("Successfully created task"));
+      .subscribe(t => {
+        alert("Successfully created task");
+        this.router.navigate(['/tasks']);
+      });
   }
 
 }
