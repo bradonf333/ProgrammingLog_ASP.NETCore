@@ -1,5 +1,6 @@
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
+import { ProgrammingTask } from '../app/models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class TaskListComponent implements OnInit {
 
   pageTitle: string = "Tasks";
-  tasks: any[];
+  tasks: ProgrammingTask[];
 
   constructor(private taskService: TaskService) { }
 
