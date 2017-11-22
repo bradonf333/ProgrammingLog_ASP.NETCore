@@ -68,22 +68,22 @@
       </div>
 
       <div class='form-group'>
+          <label for='description' class='col-md-2 control-label'>Summary</label>
+          <div class='col-md-4'>
+            <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='taskSummary' rows='2'
+              [(ngModel)]='mainTask.summary' name='taskSummary' required #taskSummary="ngModel"></textarea>
+            <small class="form-text text-muted">Keep under 100 characters</small>
+            <div class='alert alert-danger' *ngIf='taskSummary.touched && !taskSummary.valid'>Please enter a Summary for the Task</div>                    
+          </div>
+        </div>
+
+      <div class='form-group'>
         <label for='description' class='col-md-2 control-label'>Description</label>
         <div class='col-md-4'>
-          <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='taskDescription' rows='4'
+          <textarea type='text' class='form-control' placeholder='Description of the task you completed' id='taskDescription' rows='6'
             [(ngModel)]='mainTask.description' name='taskDescription' required #taskDescription="ngModel"></textarea>
           <small class="form-text text-muted">Keep under 500 characters</small>
           <div class='alert alert-danger' *ngIf='taskDescription.touched && !taskDescription.valid'>Please enter a Description for the Task</div>          
-        </div>
-      </div>
-
-      <div class='form-group'>
-        <label for='description' class='col-md-2 control-label'>Summary</label>
-        <div class='col-md-4'>
-          <textarea type='text' class='form-control' placeholder='Short Summary of the task you completed' id='taskSummary' rows='2'
-            [(ngModel)]='mainTask.summary' name='taskSummary' required #taskSummary="ngModel"></textarea>
-          <small class="form-text text-muted">Keep under 100 characters</small>
-          <div class='alert alert-danger' *ngIf='taskSummary.touched && !taskSummary.valid'>Please enter a Summary for the Task</div>                    
         </div>
       </div>
 

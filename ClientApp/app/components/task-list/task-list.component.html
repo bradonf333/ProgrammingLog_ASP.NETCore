@@ -12,12 +12,14 @@
         <table class="table" *ngIf='tasks && tasks.length'>
           <thead>
             <tr>
+              <th>Id</th>
               <th>Hours</th>
               <th>Language(s)</th>
               <th>Task Summary</th>
               <th>Task Date</th>
             </tr>
             <tr *ngFor='let task of tasks'>
+              <td><a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a></td>
               <td>{{ task.hours | number:'.1-5'}}</td>
               <td>
                 <span *ngFor='let lang of task.languages; first as isFirst'>

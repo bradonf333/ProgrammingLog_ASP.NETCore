@@ -7,6 +7,7 @@ namespace ProgrammingLog.Controllers.Resources
 {
     public class SaveProgrammingTaskResource
     {
+        public int Id { get; set; }
         public double Hours { get; set; }
 
         public string Description { get; set; }
