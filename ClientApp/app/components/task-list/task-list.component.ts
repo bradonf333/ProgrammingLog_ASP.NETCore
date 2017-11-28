@@ -22,7 +22,6 @@ export class TaskListComponent implements OnInit {
     this.taskService.getTasks()
       .subscribe(tasks => {
         this.tasks = tasks;
-        console.log("Tasks", this.tasks);
       });
 
       this.taskService.getLanguages()
