@@ -2,6 +2,7 @@ import { ProgrammingTask } from './../app/models/task';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { KeyValuePair } from '../app/models/keyValuePair';
 
 @Component({
   selector: 'app-task-form',
@@ -11,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
-  languages: any[];
+  languages: KeyValuePair[];
   task: ProgrammingTask = {
     id: 0,
     hours: '',
