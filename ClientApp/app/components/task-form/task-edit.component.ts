@@ -54,7 +54,7 @@ export class TaskEditComponent implements OnInit {
   }
 
   /**
-   * Pass in a SaveProgramminTask and map to a ProgrammingTask.
+   * Pass in a SaveProgrammingTask and map to a ProgrammingTask.
    * Main objective is to take the KeyValuePairs of SaveProgrammingTask.Languages 
    * and map just the Id values to the ProgrammingTask.Languages array.
    * @param t 
