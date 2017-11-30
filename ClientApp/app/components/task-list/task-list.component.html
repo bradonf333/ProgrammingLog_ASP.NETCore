@@ -51,7 +51,7 @@
       <div class="row"></div>
 
       <div class="table-responsive">
-        <table class="table" *ngIf='tasks && tasks.length'>
+        <table class="table" *ngIf='filteredTasks && filteredTasks.length'>
           <thead>
             <tr>
               <th>Id</th>
@@ -60,7 +60,7 @@
               <th>Task Summary</th>
               <th>Task Date</th>
             </tr>
-            <tr *ngFor='let task of tasks'>
+            <tr *ngFor='let task of filteredTasks'>
               <td>
                 <a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a>
               </td>
