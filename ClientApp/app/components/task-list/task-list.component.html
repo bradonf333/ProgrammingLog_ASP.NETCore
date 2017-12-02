@@ -32,11 +32,9 @@
             </select>
           </div>
           <div class="col-md-4">
-            <label for="languages">Example 1</label>
-            <select name="languages" id="languages" class="form-control">
-              <option value=""></option>
-              <option *ngFor="let l of languages" value="{{ l.id }}">{{ l.language }}</option>
-            </select>
+            <label for="taskSummaryKeyWord">Task Summary Key Word</label>
+            <input type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="filter.summaryKeyWord">
+            <button class="btn btn-md btn-primary" (click)="onTaskSummaryFilter()">Filter</button>
           </div>
           <div class="col-md-4">
             <label for="languages">Example 2</label>

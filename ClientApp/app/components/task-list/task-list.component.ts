@@ -60,9 +60,34 @@ export class TaskListComponent implements OnInit {
       //   }
       // }
     }
+    else if (this.filter.summaryKeyWord) {
+      this.filteredTasks = this.allTasks;
+      this.onTaskSummaryFilter();
+    }
+    else {
+      console.log("summaryKeyWord", this.filter.summaryKeyWord);
+      this.filteredTasks = this.allTasks;
+    }
+  }
+
+  onTaskSummaryFilter() {
+
+    var tasks = this.filteredTasks;
+
+    if (this.filter.summaryKeyWord) {
+
+      this.filteredTasks = tasks.filter(
+        task => task.summary.toLocaleLowerCase().includes(this.filter.summaryKeyWord.toLocaleLowerCase())
+      );
+    }
+    else if (this.filter.languageId) {
+      this.filteredTasks = this.allTasks;
+      this.onLanguageFilterChange();
+    }
     else {
       this.filteredTasks = this.allTasks;
     }
+
   }
 
 }
