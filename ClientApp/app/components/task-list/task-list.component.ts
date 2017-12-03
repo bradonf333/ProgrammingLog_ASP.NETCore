@@ -36,9 +36,21 @@ export class TaskListComponent implements OnInit {
 
     var tasks = this.allTasks;
 
-    if (this.filter.languageId) {
+    /**
+     * If the TaskSummaryKeyWord Filter has a value we need to call that filter function to set the filtered list value
+     * based on that filter first.
+     * If it has no value then we just reset the fitlered tasks to all tasks
+     */
+    if (this.filter.summaryKeyWord) {
+      this.onTaskSummaryFilter();
+      tasks = this.filteredTasks;
+    }
+    else {
+      tasks = this.allTasks;
+    }
 
-      // Filter and some version of my nested for loops below!
+    if (this.filter.languageId) {
+      // Filter & some version of my nested for loops below!
       this.filteredTasks = tasks.filter(
         (task) => task.languages.some(
           (language) => language.id == this.filter.languageId));
@@ -61,28 +73,22 @@ export class TaskListComponent implements OnInit {
       // }
     }
     else if (this.filter.summaryKeyWord) {
-      this.filteredTasks = this.allTasks;
       this.onTaskSummaryFilter();
+      tasks = this.filteredTasks;
     }
     else {
-      console.log("summaryKeyWord", this.filter.summaryKeyWord);
       this.filteredTasks = this.allTasks;
     }
   }
 
   onTaskSummaryFilter() {
 
-    var tasks = this.filteredTasks;
+    var tasks = this.allTasks;
 
     if (this.filter.summaryKeyWord) {
-
       this.filteredTasks = tasks.filter(
         task => task.summary.toLocaleLowerCase().includes(this.filter.summaryKeyWord.toLocaleLowerCase())
       );
-    }
-    else if (this.filter.languageId) {
-      this.filteredTasks = this.allTasks;
-      this.onLanguageFilterChange();
     }
     else {
       this.filteredTasks = this.allTasks;
