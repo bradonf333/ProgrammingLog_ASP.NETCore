@@ -90,9 +90,32 @@ export class TaskListComponent implements OnInit {
         task => task.summary.toLocaleLowerCase().includes(this.filter.summaryKeyWord.toLocaleLowerCase())
       );
     }
+    else if (this.filter.languageId) {
+      this.onLanguageFilterChange();
+    }
     else {
       this.filteredTasks = this.allTasks;
     }
+
+    // if (this.filter.languageId) {
+    //   this.onLanguageFilterChange();
+    //   tasks = this.filteredTasks;
+    // }
+    // else {
+    //   tasks = this.allTasks;
+    // }
+
+    // if (this.filter.summaryKeyWord) {
+    //   this.filteredTasks = tasks.filter(
+    //     task => task.summary.toLocaleLowerCase().includes(this.filter.summaryKeyWord.toLocaleLowerCase()));
+    // }
+    // else if (this.filter.languageId) {
+    //   this.onLanguageFilterChange();
+    //   tasks = this.filteredTasks;
+    // }
+    // else {
+    //   this.filteredTasks = this.allTasks;
+    // }
 
   }
 
