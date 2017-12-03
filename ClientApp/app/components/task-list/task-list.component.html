@@ -8,23 +8,20 @@
 
     <form class='form-horizontal'>
 
-      <div>
-        <span>
-          <br>
-          <a [routerLink]="['/tasks/new']" class="btn btn-primary">New Task</a>
-          <br>
-          <br>
-        </span>
-      </div>
-
       <div class="well">
         <div class="row">
+          <div class="col-md-6">
+            <a [routerLink]="['/tasks/new']" class="btn btn-primary">New Task</a>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-12">
+            <hr>
             <h3>Filter Options:</h3>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-2">
             <label for="languages">Language</label>
             <select name="languages" id="languages" class="form-control" [(ngModel)]="filter.languageId" (change)="onLanguageFilterChange()">
               <option value=""></option>
@@ -32,12 +29,16 @@
             </select>
           </div>
           <div class="col-md-4">
-            <label for="taskSummaryKeyWord">Task Summary Key Word</label>
-            <input type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="filter.summaryKeyWord">
-            <button class="btn btn-md btn-primary" (click)="onTaskSummaryFilter()">Filter</button>
+            <label for="taskSummaryKeyWord">Filter By Summary</label>
+            <div class="input-group">
+              <input class="form-control" type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="filter.summaryKeyWord">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" (click)="onTaskSummaryFilter()">Filter</button>
+              </span>
+            </div>
           </div>
           <div class="col-md-4">
-            <label for="languages">Example 2</label>
+            <label for="languages">Future Filter #3</label>
             <select name="languages" id="languages" class="form-control">
               <option value=""></option>
               <option *ngFor="let l of languages" value="{{ l.id }}">{{ l.language }}</option>
