@@ -35,6 +35,8 @@
     "isomorphic-fetch": "2.2.1",
     "jquery": "3.2.1",
     "json-loader": "0.5.4",
+    "ng2-order-pipe": "^0.1.5",
+    "ng2-search-filter": "^0.3.1",
     "preboot": "4.5.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.10",

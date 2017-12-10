@@ -37,12 +37,11 @@
               </span>
             </div>
           </div>
-          <div class="col-md-4">
-            <label for="languages">Future Filter #3</label>
-            <select name="languages" id="languages" class="form-control">
-              <option value=""></option>
-              <option *ngFor="let l of languages" value="{{ l.id }}">{{ l.language }}</option>
-            </select>
+          <div class="col-md-6">
+            <label for="taskDescSummFilter">Live Filter: Summary Or Description</label>
+            <div class="input-group">
+              <input class="form-control" type="text" size="35" id="taskDescSummFilter" name="taskDescSummFilter" [(ngModel)]="Ng2Filter">
+            </div>
           </div>
         </div>
       </div>
@@ -59,7 +58,7 @@
               <th>Task Summary</th>
               <th>Task Date</th>
             </tr>
-            <tr *ngFor='let task of filteredTasks'>
+            <tr *ngFor='let task of filteredTasks | filter:Ng2Filter'>
               <td>
                 <a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a>
               </td>
