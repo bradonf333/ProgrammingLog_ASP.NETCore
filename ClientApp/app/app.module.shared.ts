@@ -14,6 +14,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskEditComponent } from './components/task-form/task-edit.component';
+import { TaskDateSortPipe } from './components/task-list/task-date-sort.pipe';
+
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { TaskEditComponent } from './components/task-form/task-edit.component';
         TaskFormComponent,
         WelcomeComponent,
         TaskListComponent,
-        TaskEditComponent
+        TaskEditComponent,
+        TaskDateSortPipe
     ],
     imports: [
         CommonModule,

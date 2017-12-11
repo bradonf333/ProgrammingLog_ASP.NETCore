@@ -58,7 +58,7 @@
               <th>Task Summary</th>
               <th>Task Date</th>
             </tr>
-            <tr *ngFor='let task of filteredTasks | filter:Ng2Filter'>
+            <tr *ngFor='let task of filteredTasks | taskDateSort | filter:Ng2Filter'>
               <td>
                 <a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a>
               </td>
