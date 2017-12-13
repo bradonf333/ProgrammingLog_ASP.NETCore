@@ -44,7 +44,7 @@ export class TaskListComponent implements OnInit {
     var tasks = this.filteredTasks;
 
     // Seems like there may be a better way to do this!
-    
+
     if (this.sort === "taskId") {
       tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
         if (task1.id < task2.id) {
@@ -121,7 +121,7 @@ export class TaskListComponent implements OnInit {
     /**
      * If the TaskSummaryKeyWord Filter has a value we need to call that filter function to set the filtered list value
      * based on that filter first.
-     * If it has no value then we just reset the fitlered tasks to all tasks
+     * If it has no value then we just reset the filtered tasks to all tasks
      */
     if (this.filter.summaryKeyWord) {
       this.onTaskSummaryFilter();
