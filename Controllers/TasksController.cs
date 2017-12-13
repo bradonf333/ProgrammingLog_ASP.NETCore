@@ -59,9 +59,10 @@ namespace ProgrammingLog.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<SaveProgrammingTaskResource>> GetTasks()
+        public async Task<IList<SaveProgrammingTaskResource>> GetTasks(FilterResource filterResource)
         {
-            var tasks = await repository.GetAllTasksAsync();
+            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var tasks = await repository.GetAllTasksAsync(filter);
             return mapper.Map<IList<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
         }
 

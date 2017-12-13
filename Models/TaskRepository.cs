@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,17 +24,24 @@ namespace ProgrammingLog.Models
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(bool includeTaskLanguages = true)
+        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(Filter filter, bool includeTaskLanguages = true)
         {
             if(!includeTaskLanguages)
             {
                 return await dbContext.Tasks.ToListAsync();
             }
 
-            return await dbContext.Tasks
+            var query = dbContext.Tasks
                 .Include(pt => pt.ProgrammingLanguages)
                     .ThenInclude(tl => tl.Language)
-                .ToListAsync();
+                .AsQueryable();
+
+            if (filter.LanguageId.HasValue)
+            {
+                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == filter.LanguageId));
+            }
+
+            return await query.ToListAsync();
         }
 
         public void Add(ProgrammingTask task)
