@@ -15,6 +15,8 @@ export class TaskListComponent implements OnInit {
   allTasks: SaveProgrammingTask[];
   filteredTasks: SaveProgrammingTask[] = [];
   filter: any = {};
+  sort: string;
+  reverseSort: boolean = false;
   languages: KeyValuePair[];
 
   constructor(private taskService: TaskService) { }
@@ -30,6 +32,86 @@ export class TaskListComponent implements OnInit {
       .subscribe(languages => {
         this.languages = languages;
       });
+  }
+
+  /**
+   * Takes a string parameter and sorts the lists of tasks by the given string.
+   * @param sortBy 
+   */
+  onSort(sortBy: string) {
+
+    this.sort = sortBy;
+    var tasks = this.filteredTasks;
+
+    // Seems like there may be a better way to do this!
+    
+    if (this.sort === "taskId") {
+      tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
+        if (task1.id < task2.id) {
+          return -1;
+        } else if (task1.id > task2.id) {
+          return 1
+        } else {
+          return 0
+        }
+      });
+    }
+
+    if (this.sort === "taskHour") {
+      tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
+        if (task1.hours < task2.hours) {
+          return -1;
+        } else if (task1.hours > task2.hours) {
+          return 1
+        } else {
+          return 0
+        }
+      });
+    }
+
+    if (this.sort === "taskLanguage") {
+      tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
+        if (task1.languages < task2.languages) {
+          return -1;
+        } else if (task1.languages > task2.languages) {
+          return 1
+        } else {
+          return 0
+        }
+      });
+    }
+
+    if (this.sort === "taskSummary") {
+      tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
+        if (task1.summary < task2.summary) {
+          return -1;
+        } else if (task1.summary > task2.summary) {
+          return 1
+        } else {
+          return 0
+        }
+      });
+    }
+
+    if (this.sort === "taskDate") {
+      tasks = tasks.sort((task1: SaveProgrammingTask, task2: SaveProgrammingTask) => {
+        if (task1.taskDate < task2.taskDate) {
+          return -1;
+        } else if (task1.taskDate > task2.taskDate) {
+          return 1
+        } else {
+          return 0
+        }
+      });
+    }
+
+    if (!this.reverseSort) {
+      this.filteredTasks = tasks;
+    } else {
+      this.filteredTasks = tasks.reverse();
+    }
+
+    this.reverseSort = !this.reverseSort;
   }
 
   onLanguageFilterChange() {

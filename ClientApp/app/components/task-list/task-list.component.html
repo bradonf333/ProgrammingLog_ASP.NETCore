@@ -52,11 +52,19 @@
         <table class="table" *ngIf='filteredTasks && filteredTasks.length'>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Hours</th>
+              <th (click)="onSort('taskId')">Id
+                <span class="glyphicon sort-icon" *ngIf="sort === 'taskId'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              </th>
+              <th (click)="onSort('taskHour')">Hours
+                <span class="glyphicon sort-icon" *ngIf="sort === 'taskHour'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              </th>
               <th>Language(s)</th>
-              <th>Task Summary</th>
-              <th>Task Date</th>
+              <th (click)="onSort('taskSummary')">Task Summary
+                <span class="glyphicon sort-icon" *ngIf="sort === 'taskSummary'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              </th>
+              <th (click)="onSort('taskDate')">Task Date
+                <span class="glyphicon sort-icon" *ngIf="sort === 'taskDate'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              </th>
             </tr>
             <tr *ngFor='let task of filteredTasks | taskDateSort | filter:Ng2Filter'>
               <td>
