@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +40,14 @@ namespace ProgrammingLog.Models
             if (filter.LanguageId.HasValue)
             {
                 query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == filter.LanguageId));
+            }
+            else if (!String.IsNullOrEmpty(filter.TaskSummary))
+            {
+                query = query.Where(pt => pt.Summary.Contains(filter.TaskSummary));
+            }
+            else if (!String.IsNullOrEmpty(filter.Description))
+            {
+                query = query.Where(pt => pt.Description.Contains(filter.Description));
             }
 
             return await query.ToListAsync();
