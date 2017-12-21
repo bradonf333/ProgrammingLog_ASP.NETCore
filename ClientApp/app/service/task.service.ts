@@ -16,8 +16,8 @@ export class TaskService {
       .map(res => res.json());
   }
 
-  getTasks() {
-    return this.http.get(this.taskUrl)
+  getTasks(filter: any) {
+    return this.http.get(this.taskUrl + '?' + this.toQueryString(filter))
       .map(res => res.json());
   }
 
@@ -44,6 +44,17 @@ export class TaskService {
   deleteTask(id: number) {
     return this.http.delete(this.taskUrl + '/' + id)
       .map(res => res.json);
+  }
+
+  toQueryString(obj: any) {
+    var parts = [];
+    for (var property in obj) {
+      var value = obj[property];
+      if (value != null && value != undefined) {
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+      }
+    }
+    return parts.join('&');
   }
 
 }
