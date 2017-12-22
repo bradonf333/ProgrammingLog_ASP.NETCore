@@ -41,9 +41,10 @@ namespace ProgrammingLog.Models
             {
                 query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == filter.LanguageId));
             }
-            else if (!String.IsNullOrEmpty(filter.TaskSummary))
+            
+            if (!String.IsNullOrEmpty(filter.SummaryKeyWord))
             {
-                query = query.Where(pt => pt.Summary.Contains(filter.TaskSummary));
+                query = query.Where(pt => pt.Summary.Contains(filter.SummaryKeyWord));
             }
             else if (!String.IsNullOrEmpty(filter.Description))
             {
