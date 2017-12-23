@@ -13,7 +13,7 @@ namespace ProgrammingLog.Mapping
         {
             // Domain to API Resource
             // CreateMap<Source, Destination>
-            CreateMap<FilterResource, Filter>();
+            CreateMap<TaskQueryResource, TaskQuery>();
             CreateMap<ProgrammingTask, SaveProgrammingTaskResource>()
             .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
                 tl => new ProgrammingLanguage

@@ -2,7 +2,7 @@ using System;
 
 namespace ProgrammingLog.Controllers.Resources
 {
-    public class FilterResource
+    public class TaskQueryResource
     {
         public double? Hours { get; set; }
         public int? LanguageId { get; set; }
