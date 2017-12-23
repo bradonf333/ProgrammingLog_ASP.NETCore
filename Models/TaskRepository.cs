@@ -25,7 +25,7 @@ namespace ProgrammingLog.Models
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(TaskQuery filter, bool includeTaskLanguages = true)
+        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(TaskQuery queryObj, bool includeTaskLanguages = true)
         {
             if(!includeTaskLanguages)
             {
@@ -37,18 +37,18 @@ namespace ProgrammingLog.Models
                     .ThenInclude(tl => tl.Language)
                 .AsQueryable();
 
-            if (filter.LanguageId.HasValue)
+            if (queryObj.LanguageId.HasValue)
             {
-                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == filter.LanguageId));
+                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
             }
             
-            if (!String.IsNullOrEmpty(filter.SummaryKeyWord))
+            if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
             {
-                query = query.Where(pt => pt.Summary.Contains(filter.SummaryKeyWord));
+                query = query.Where(pt => pt.Summary.Contains(queryObj.SummaryKeyWord));
             }
-            else if (!String.IsNullOrEmpty(filter.Description))
+            else if (!String.IsNullOrEmpty(queryObj.Description))
             {
-                query = query.Where(pt => pt.Description.Contains(filter.Description));
+                query = query.Where(pt => pt.Description.Contains(queryObj.Description));
             }
 
             return await query.ToListAsync();
