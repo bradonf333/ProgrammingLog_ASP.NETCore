@@ -2,7 +2,7 @@ using System;
 
 namespace ProgrammingLog.Models
 {
-    public class Filter
+    public class TaskQuery
     {
         public double? Hours { get; set; }
         public int? LanguageId { get; set; }

@@ -25,7 +25,7 @@ namespace ProgrammingLog.Models
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(Filter filter, bool includeTaskLanguages = true)
+        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(TaskQuery filter, bool includeTaskLanguages = true)
         {
             if(!includeTaskLanguages)
             {
