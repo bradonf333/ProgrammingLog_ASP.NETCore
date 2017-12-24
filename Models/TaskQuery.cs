@@ -1,8 +1,9 @@
 using System;
+using ProgrammingLog.Extensions;
 
 namespace ProgrammingLog.Models
 {
-    public class TaskQuery
+    public class TaskQuery : IQueryObject
     {
         public double? Hours { get; set; }
         public int? LanguageId { get; set; }
@@ -10,6 +11,7 @@ namespace ProgrammingLog.Models
         public string Description { get; set; }
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }
-
+        string IQueryObject.SortyBy { get; set; }
+        bool IQueryObject.IsSortAscending { get; set; }
     }
 }
