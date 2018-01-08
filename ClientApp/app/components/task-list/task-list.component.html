@@ -23,7 +23,7 @@
         <div class="row">
           <div class="col-md-2">
             <label for="languages">Language</label>
-            <select name="languages" id="languages" class="form-control" [(ngModel)]="filter.languageId" (change)="onLanguageFilterChange()">
+            <select name="languages" id="languages" class="form-control" [(ngModel)]="filter.languageId" (change)="onFilterChange()">
               <option value=""></option>
               <option *ngFor="let l of languages" value="{{ l.id }}">{{ l.language }}</option>
             </select>
@@ -33,7 +33,7 @@
             <div class="input-group">
               <input class="form-control" type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="filter.summaryKeyWord">
               <span class="input-group-btn">
-                <button class="btn btn-primary" (click)="onTaskSummaryFilter()">Filter</button>
+                <button class="btn btn-primary" (click)="onFilterChange()">Filter</button>
               </span>
             </div>
           </div>
