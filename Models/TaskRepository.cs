@@ -25,7 +25,7 @@ namespace ProgrammingLog.Models
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(Filter filter, bool includeTaskLanguages = true)
+        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(TaskQuery queryObj, bool includeTaskLanguages = true)
         {
             if(!includeTaskLanguages)
             {
@@ -37,19 +37,36 @@ namespace ProgrammingLog.Models
                     .ThenInclude(tl => tl.Language)
                 .AsQueryable();
 
-            if (filter.LanguageId.HasValue)
+            if (queryObj.LanguageId.HasValue)
             {
-                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == filter.LanguageId));
+                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
+            }
+
+            if (queryObj.SortBy == "taskDate")
+            {
+                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.TaskDate) : query.OrderByDescending(pt => pt.TaskDate);
+            }
+            if (queryObj.SortBy == "taskHours")
+            {
+                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Hours) : query.OrderByDescending(pt => pt.Hours);
+            }
+            if (queryObj.SortBy == "taskSummary")
+            {
+                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Summary) : query.OrderByDescending(pt => pt.Summary);
+            }
+            if (queryObj.SortBy == "id")
+            {
+                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Id) : query.OrderByDescending(pt => pt.Id);
             }
             
-            if (!String.IsNullOrEmpty(filter.SummaryKeyWord))
-            {
-                query = query.Where(pt => pt.Summary.Contains(filter.SummaryKeyWord));
-            }
-            else if (!String.IsNullOrEmpty(filter.Description))
-            {
-                query = query.Where(pt => pt.Description.Contains(filter.Description));
-            }
+            // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
+            // {
+            //     query = query.Where(pt => pt.Summary.Contains(queryObj.SummaryKeyWord));
+            // }
+            // else if (!String.IsNullOrEmpty(queryObj.Description))
+            // {
+            //     query = query.Where(pt => pt.Description.Contains(queryObj.Description));
+            // }
 
             return await query.ToListAsync();
         }
