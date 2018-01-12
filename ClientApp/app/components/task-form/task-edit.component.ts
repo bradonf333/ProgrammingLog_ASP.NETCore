@@ -14,7 +14,7 @@ import { SaveProgrammingTask } from '../app/models/saveTask';
 })
 export class TaskEditComponent implements OnInit {
   pageTitle: string = "Edit a Programming Task";
-  languages: KeyValuePair[];
+  languages: any[];
 
   mainTask: ProgrammingTask = {
     id: 0,
@@ -49,9 +49,37 @@ export class TaskEditComponent implements OnInit {
     this.taskService.getLanguages()
       .subscribe(languages => {
         this.languages = languages;
+        this.languages = this.languages.sort(function(a,b) {
+          return a.language.localeCompare(b.language);
+        });
         console.log("Languages", this.languages);
+        // this.sortLanguages();
       });
   }
+
+  // sortLanguages() {
+  //   var languages = this.languages;
+  //   console.log("Local languages", languages);
+  //   languages = languages.sort(function (a, b) {
+  //     console.log("A: ", a.id);
+  //     console.log("A: ", a);
+  //     console.log("B: ", b.id);
+  //     console.log("B: ", b);
+  //     var nameA = a.name.toLocaleLowerCase();
+  //     var nameB = b.name.toLocaleLowerCase();
+  //     if (nameA < nameB) {
+  //       return -1;
+  //     }
+  //     else if (nameA > nameB) {
+  //       return 1;
+  //     }
+  //     else {
+  //       return 0;
+  //     }
+  //   });
+
+  //   this.languages = languages;
+  // }
 
   /**
    * Pass in a SaveProgrammingTask and map to a ProgrammingTask.

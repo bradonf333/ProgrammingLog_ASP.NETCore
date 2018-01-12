@@ -12,7 +12,7 @@ import { KeyValuePair } from '../app/models/keyValuePair';
 export class TaskFormComponent implements OnInit {
 
   pageTitle: string = "Create a new Programming Task";
-  languages: KeyValuePair[];
+  languages: any[];
   task: ProgrammingTask = {
     id: 0,
     hours: '',
@@ -29,6 +29,9 @@ export class TaskFormComponent implements OnInit {
     this.taskService.getLanguages()
       .subscribe(languages => {
         this.languages = languages;
+        this.languages = this.languages.sort(function(a,b) {
+          return a.language.localeCompare(b.language);
+        });
         console.log("Languages", this.languages);
       });
   }
