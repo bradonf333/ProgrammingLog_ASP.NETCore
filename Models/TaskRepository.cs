@@ -53,14 +53,7 @@ namespace ProgrammingLog.Models
             };
 
             // Apply sorting based on the columnsMap & IsSortAsc value, which are both given in the Query String
-            if(queryObj.IsSortAscending)
-            {
-                query = query.OrderBy(columnsMap[queryObj.SortBy]);
-            }
-            else
-            {
-                query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
-            }
+            query = ApplyOrdering(queryObj, query, columnsMap);
             
             // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
             // {
@@ -72,6 +65,24 @@ namespace ProgrammingLog.Models
             // }
 
             return await query.ToListAsync();
+        }
+
+        private IQueryable<ProgrammingTask> ApplyOrdering(
+            TaskQuery queryObj, 
+            IQueryable<ProgrammingTask> query,
+            Dictionary<string, Expression<Func<ProgrammingTask,object>>> columnsMap)
+        {
+            // Apply sorting based on the columnsMap & IsSortAsc value, which are both given in the Query String
+            if(queryObj.IsSortAscending)
+            {
+                query = query.OrderBy(columnsMap[queryObj.SortBy]);
+            }
+            else
+            {
+                query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
+            }
+
+            return query;
         }
 
         public void Add(ProgrammingTask task)
