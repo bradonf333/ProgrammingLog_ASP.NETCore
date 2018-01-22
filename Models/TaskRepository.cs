@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,21 +43,23 @@ namespace ProgrammingLog.Models
                 query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
             }
 
-            if (queryObj.SortBy == "taskDate")
+            // Create a LINQ mapping for the columns that are available to sort by. 
+            var columnsMap = new Dictionary<string, Expression<Func<ProgrammingTask, object>>>()
             {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.TaskDate) : query.OrderByDescending(pt => pt.TaskDate);
+                ["taskDate"] = pt => pt.TaskDate,
+                ["taskHours"] = pt => pt.Hours,
+                ["taskSummary"] = pt => pt.Summary,
+                ["id"] = pt => pt.Id
+            };
+
+            // Apply sorting based on the columnsMap & IsSortAsc value, which are both given in the Query String
+            if(queryObj.IsSortAscending)
+            {
+                query = query.OrderBy(columnsMap[queryObj.SortBy]);
             }
-            if (queryObj.SortBy == "taskHours")
+            else
             {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Hours) : query.OrderByDescending(pt => pt.Hours);
-            }
-            if (queryObj.SortBy == "taskSummary")
-            {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Summary) : query.OrderByDescending(pt => pt.Summary);
-            }
-            if (queryObj.SortBy == "id")
-            {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(pt => pt.Id) : query.OrderByDescending(pt => pt.Id);
+                query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
             }
             
             // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
