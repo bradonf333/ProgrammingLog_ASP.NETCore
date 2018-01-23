@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ProgrammingLog.Extensions;
 
 namespace ProgrammingLog.Models
 {
@@ -38,22 +39,26 @@ namespace ProgrammingLog.Models
                     .ThenInclude(tl => tl.Language)
                 .AsQueryable();
 
-            if (queryObj.LanguageId.HasValue)
-            {
-                query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
-            }
+            // Can't remember what this was for, but I had it here before I switch to sorting via the server.
+            // Leaving here for now.
+            // if (queryObj.LanguageId.HasValue)
+            // {
+            //     query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
+            // }
+            
 
             // Create a LINQ mapping for the columns that are available to sort by. 
             var columnsMap = new Dictionary<string, Expression<Func<ProgrammingTask, object>>>()
             {
                 ["taskDate"] = pt => pt.TaskDate,
                 ["taskHours"] = pt => pt.Hours,
-                ["taskSummary"] = pt => pt.Summary,
-                ["id"] = pt => pt.Id
+                ["taskSummary"] = pt => pt.Summary
+                // ["id"] = pt => pt.Id
             };
 
             // Apply sorting based on the columnsMap & IsSortAsc value, which are both given in the Query String
-            query = ApplyOrdering(queryObj, query, columnsMap);
+            // query = ApplyOrdering(queryObj, query, columnsMap);
+            query = query.ApplyOrdering(queryObj, columnsMap);
             
             // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
             // {

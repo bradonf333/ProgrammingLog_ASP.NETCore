@@ -9,15 +9,20 @@ namespace ProgrammingLog.Extensions {
         public static IQueryable<T> ApplyOrdering<T> (
             this IQueryable<T> query,
             IQueryObject queryObj,
-            Dictionary<string, Expression<Func<T, object>> > columnsMap) {
-            if (String.IsNullOrWhiteSpace (queryObj.SortyBy) || !columnsMap.ContainsKey (queryObj.SortyBy)) {
+            Dictionary<string, Expression<Func<T, object>>> columnsMap) 
+        {
+            if (String.IsNullOrWhiteSpace(queryObj.SortBy) || !columnsMap.ContainsKey(queryObj.SortBy)) 
+            {
                 return query;
             }
-            if (queryObj.IsSortAscending) {
-                return query.OrderBy (columnsMap[queryObj.SortyBy]);
-            } else {
-                return query.OrderByDescending (columnsMap[queryObj.SortyBy]);
-            }
+            if (queryObj.IsSortAscending) 
+            {
+                return query.OrderBy(columnsMap[queryObj.SortBy]);
+            } 
+            else 
+            {
+                return query.OrderByDescending(columnsMap[queryObj.SortBy]);
+            }                
         }
     }
 }

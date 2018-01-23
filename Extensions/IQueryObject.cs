@@ -1,7 +1,7 @@
 namespace ProgrammingLog.Extensions {
     public interface IQueryObject 
     {
-        string SortyBy { get; set; }
+        string SortBy { get; set; }
         bool IsSortAscending { get; set; }
     }
 }
