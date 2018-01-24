@@ -52,21 +52,22 @@
         <table class="table" *ngIf='allTasks && allTasks.length'>
           <thead>
             <tr class="something">
-              <th (click)="onSort('taskId')">Id
-                <span class="glyphicon sort-icon" *ngIf="sort === 'taskId'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              <th (click)="sortBy('taskId')">Id
+                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskId'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
               </th>
-              <th class="col-md-1" (click)="onSort('taskHour')">Hours
-                <span class="glyphicon sort-icon" *ngIf="sort === 'taskHour'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              <th class="col-md-1" (click)="sortBy('taskHours')">Hours
+                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskHours'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
               </th>
               <th class="col-md-2" >Language(s)</th>
-              <th (click)="onSort('taskSummary')">Task Summary
-                <span class="glyphicon sort-icon" *ngIf="sort === 'taskSummary'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              <th (click)="sortBy('taskSummary')">Task Summary
+                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskSummary'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
               </th>
-              <th class="col-md-2" (click)="onSort('taskDate')">Task Date
-                <span class="glyphicon sort-icon" *ngIf="sort === 'taskDate'" [ngClass]="{'glyphicon-chevron-up':reverseSort,'glyphicon-chevron-down':!reverseSort}"></span>
+              <th class="col-md-2" (click)="sortBy('taskDate')">Task Date
+                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskDate'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
               </th>
             </tr>
-            <tr *ngFor='let task of allTasks | taskDateSort | filter:Ng2Filter'>
+            <tr *ngFor='let task of allTasks | filter:Ng2Filter'>
+            <!-- <tr *ngFor='let task of allTasks | taskDateSort | filter:Ng2Filter'> -->
               <td>
                 <a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a>
               </td>

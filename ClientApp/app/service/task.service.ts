@@ -46,8 +46,11 @@ export class TaskService {
       .map(res => res.json);
   }
 
-  toQueryString(obj: any) {
-    var parts = [];
+  toQueryString(obj: any[]) {
+
+    var parts: any[];
+    parts = [];
+
     for (var property in obj) {
       var value = obj[property];
       if (value != null && value != undefined) {

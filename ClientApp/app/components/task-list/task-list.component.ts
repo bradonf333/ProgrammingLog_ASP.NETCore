@@ -1,3 +1,4 @@
+import { Query } from './../app/models/query';
 import { SaveProgrammingTask } from './../app/models/saveTask';
 import { TaskService } from './../../service/task.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,10 @@ export class TaskListComponent implements OnInit {
 
   pageTitle: string = "Tasks";
   allTasks: SaveProgrammingTask[];
+  query: Query = {
+    sortBy: 'taskDate',
+    isSortAscending: false
+  };
   filter: any = {};
   sort: string;
   reverseSort: boolean = false;
@@ -22,19 +27,18 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.populateTasks();
-
     this.taskService.getLanguages()
       .subscribe(languages => {
         this.languages = languages;
       });
+
+    this.populateTasks();
   }
 
   private populateTasks() {
-    this.taskService.getTasks(this.filter)
+    this.taskService.getTasks(this.query)
       .subscribe(tasks => this.allTasks = tasks);
   }
-
 
   onLanguageFilterChange() {
     this.populateTasks();
@@ -45,6 +49,18 @@ export class TaskListComponent implements OnInit {
   }
 
   onTaskSummaryFilter() {
+    this.populateTasks();
+  }
+
+  sortBy(columnName: any) {
+    console.log(this.query);
+    if (this.query.sortBy === columnName) {
+      this.query.isSortAscending = !this.query.isSortAscending;
+    } else {
+      this.query.sortBy = columnName;
+      this.query.isSortAscending = true;
+    }
+
     this.populateTasks();
   }
 }
