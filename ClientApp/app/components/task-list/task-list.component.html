@@ -52,18 +52,18 @@
         <table class="table" *ngIf='allTasks && allTasks.length'>
           <thead>
             <tr class="something">
-              <th (click)="sortBy('taskId')">Id
-                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskId'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
-              </th>
-              <th class="col-md-1" (click)="sortBy('taskHours')">Hours
-                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskHours'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
-              </th>
-              <th class="col-md-2" >Language(s)</th>
-              <th (click)="sortBy('taskSummary')">Task Summary
-                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskSummary'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
-              </th>
-              <th class="col-md-2" (click)="sortBy('taskDate')">Task Date
-                <span class="glyphicon sort-icon" *ngIf="query.sortBy === 'taskDate'" [ngClass]="{'glyphicon-chevron-up':query.isSortAscending,'glyphicon-chevron-down':!query.isSortAscending}"></span>
+              <th *ngFor="let c of columns">
+                <div *ngIf="c.isSortable" (click)="sortBy(c.key)" >
+                  {{ c.title }}
+                  <i *ngIf="query.sortBy === c.key"
+                      class="fa"
+                      [class.fa-sort-asc]="query.isSortAscending"
+                      [class.fa-sort-desc]="!query.isSortAscending">
+                  </i>
+                </div>
+                <div *ngIf="!c.isSortable">
+                  {{ c.title }}
+                </div>
               </th>
             </tr>
             <tr *ngFor='let task of allTasks | filter:Ng2Filter'>

@@ -22,6 +22,13 @@ export class TaskListComponent implements OnInit {
   sort: string;
   reverseSort: boolean = false;
   languages: KeyValuePair[];
+  columns = [
+    { title: 'Id' },
+    { title: 'Hours', key: 'taskHours', isSortable: true },
+    { title: 'Language(s)' },
+    { title: 'Task Summary', key: 'taskSummary', isSortable: true },
+    { title: 'Task Date', key: 'taskDate', isSortable: true }
+  ];
 
   constructor(private taskService: TaskService) { }
 
