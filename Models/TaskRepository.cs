@@ -60,6 +60,8 @@ namespace ProgrammingLog.Models
             // query = ApplyOrdering(queryObj, query, columnsMap);
             query = query.ApplyOrdering(queryObj, columnsMap);
             
+            query = query.ApplyPaging(queryObj);
+            
             // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
             // {
             //     query = query.Where(pt => pt.Summary.Contains(queryObj.SummaryKeyWord));
