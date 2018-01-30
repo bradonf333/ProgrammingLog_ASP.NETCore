@@ -15,7 +15,6 @@ import { CounterComponent } from './components/counter/counter.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskEditComponent } from './components/task-form/task-edit.component';
 import { TaskDateSortPipe } from './components/task-list/task-date-sort.pipe';
-import { PaginationComponent } from './shared/pagination.component';
 
 
 @NgModule({
@@ -28,8 +27,7 @@ import { PaginationComponent } from './shared/pagination.component';
         WelcomeComponent,
         TaskListComponent,
         TaskEditComponent,
-        TaskDateSortPipe,
-        PaginationComponent
+        TaskDateSortPipe
     ],
     imports: [
         CommonModule,
