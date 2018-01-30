@@ -16,7 +16,9 @@ export class TaskListComponent implements OnInit {
   allTasks: SaveProgrammingTask[];
   query: Query = {
     sortBy: 'taskDate',
-    isSortAscending: false
+    isSortAscending: false,
+    pageSize: 15,
+    page: 1
   };
   filter: any = {};
   sort: string;
@@ -68,6 +70,11 @@ export class TaskListComponent implements OnInit {
       this.query.isSortAscending = true;
     }
 
+    this.populateTasks();
+  }
+
+  onPageChange(page: any) {
+    this.query.page = page;
     this.populateTasks();
   }
 }
