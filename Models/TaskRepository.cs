@@ -27,11 +27,16 @@ namespace ProgrammingLog.Models
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IList<ProgrammingTask>> GetAllTasksAsync(TaskQuery queryObj, bool includeTaskLanguages = true)
+        public async Task<QueryResult<ProgrammingTask>> GetAllTasksAsync(TaskQuery queryObj, bool includeTaskLanguages = true)
         {
+            var result = new QueryResult<ProgrammingTask>();
+
+            // This just returns the Tasks (No TaskLanguages).
+            // Not sure if I will ever need this or not, but leaving it here for now.
             if(!includeTaskLanguages)
             {
-                return await dbContext.Tasks.ToListAsync();
+                result.TotalItems = await dbContext.Tasks.CountAsync();
+                result.Items = await dbContext.Tasks.ToListAsync();
             }
 
             var query = dbContext.Tasks
@@ -60,7 +65,9 @@ namespace ProgrammingLog.Models
             // query = ApplyOrdering(queryObj, query, columnsMap);
             query = query.ApplyOrdering(queryObj, columnsMap);
             
-            query = query.ApplyPaging(queryObj);
+            result.TotalItems = await query.CountAsync();
+
+            result.Items = query.ApplyPaging(queryObj);
             
             // if (!String.IsNullOrEmpty(queryObj.SummaryKeyWord))
             // {
@@ -71,7 +78,7 @@ namespace ProgrammingLog.Models
             //     query = query.Where(pt => pt.Description.Contains(queryObj.Description));
             // }
 
-            return await query.ToListAsync();
+            return result;
         }
 
         private IQueryable<ProgrammingTask> ApplyOrdering(

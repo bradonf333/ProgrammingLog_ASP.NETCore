@@ -13,6 +13,7 @@ namespace ProgrammingLog.Mapping
         {
             // Domain to API Resource
             // CreateMap<Source, Destination>
+            CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<FilterResource, Filter>();
             CreateMap<TaskQueryResource, TaskQuery>();
             CreateMap<ProgrammingTask, SaveProgrammingTaskResource>()

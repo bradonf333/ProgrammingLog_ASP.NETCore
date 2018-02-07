@@ -59,11 +59,11 @@ namespace ProgrammingLog.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<SaveProgrammingTaskResource>> GetTasks(TaskQueryResource filterResource)
+        public async Task<QueryResultResource<SaveProgrammingTaskResource>> GetTasks(TaskQueryResource filterResource)
         {
             var filter = mapper.Map<TaskQueryResource, TaskQuery>(filterResource);
-            var tasks = await repository.GetAllTasksAsync(filter);
-            return mapper.Map<IList<ProgrammingTask>, List<SaveProgrammingTaskResource>>(tasks);
+            var queryResult = await repository.GetAllTasksAsync(filter);
+            return mapper.Map<QueryResult<ProgrammingTask>, QueryResultResource<SaveProgrammingTaskResource>>(queryResult);
         }
 
         [HttpPut("{id}")]

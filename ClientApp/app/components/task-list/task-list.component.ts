@@ -13,7 +13,8 @@ import { KeyValuePair } from '../app/models/keyValuePair';
 export class TaskListComponent implements OnInit {
 
   pageTitle: string = "Tasks";
-  allTasks: SaveProgrammingTask[];
+  // queryResult: SaveProgrammingTask[];
+  queryResult: any = {};
   query: Query = {
     sortBy: 'taskDate',
     isSortAscending: false,
@@ -46,7 +47,7 @@ export class TaskListComponent implements OnInit {
 
   private populateTasks() {
     this.taskService.getTasks(this.query)
-      .subscribe(tasks => this.allTasks = tasks);
+      .subscribe(tasks => this.queryResult = tasks);
   }
 
   onLanguageFilterChange() {
