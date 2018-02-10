@@ -6,8 +6,7 @@ namespace ProgrammingLog.Models
     public class TaskQuery : IQueryObject
     {
         public double Hours { get; set; }
-        // public int? LanguageId { get; set; }
-
+        public int? LanguageId { get; set; }
         public DateTime TaskDate { get; set; }
         public string TaskSummary { get; set; }
         // public string Description { get; set; }

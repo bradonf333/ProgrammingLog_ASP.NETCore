@@ -46,11 +46,14 @@ namespace ProgrammingLog.Models
 
             // Can't remember what this was for, but I had it here before I switch to sorting via the server.
             // Leaving here for now.
+            //
+            // This is the LINQ Query to get the programming languages. very important!!!
             // if (queryObj.LanguageId.HasValue)
             // {
             //     query = query.Where(pt => pt.ProgrammingLanguages.Any(pl => pl.LanguageId == queryObj.LanguageId));
             // }
             
+            query = query.ApplyFiltering(queryObj);
 
             // Create a LINQ mapping for the columns that are available to sort by. 
             var columnsMap = new Dictionary<string, Expression<Func<ProgrammingTask, object>>>()
