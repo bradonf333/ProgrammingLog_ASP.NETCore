@@ -31,7 +31,7 @@
           <div class="col-md-4">
             <label for="taskSummaryKeyWord">Filter By Summary</label>
             <div class="input-group">
-              <input class="form-control" type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="filter.summaryKeyWord">
+              <input class="form-control" type="text" id="taskSummaryKeyWord" name="taskSummaryKeyWord" [(ngModel)]="query.taskSummary">
               <span class="input-group-btn">
                 <button class="btn btn-primary" (click)="onFilterChange()">Filter</button>
               </span>
@@ -44,6 +44,13 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <button class="btn btn-primary" (click)="resetFilters()">Reset Filters</button>
+          </div>
+        </div>
+
       </div>
 
       <div class="row"></div>

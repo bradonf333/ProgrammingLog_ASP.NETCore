@@ -12,13 +12,14 @@ import { KeyValuePair } from '../app/models/keyValuePair';
 })
 export class TaskListComponent implements OnInit {
 
+  private readonly PAGE_SIZE = 15;
   pageTitle: string = "Tasks";
   // queryResult: SaveProgrammingTask[];
   queryResult: any = {};
   query: Query = {
     sortBy: 'taskDate',
     isSortAscending: false,
-    pageSize: 15,
+    pageSize: this.PAGE_SIZE,
     page: 1
   };
   filter: any = {};
@@ -76,6 +77,16 @@ export class TaskListComponent implements OnInit {
 
   onPageChange(page: any) {
     this.query.page = page;
+    this.populateTasks();
+  }
+
+  resetFilters() {
+    this.query = {
+      sortBy: 'taskDate',
+      isSortAscending: false,
+      pageSize: this.PAGE_SIZE,
+      page: 1
+    }
     this.populateTasks();
   }
 }

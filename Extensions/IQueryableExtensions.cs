@@ -12,10 +12,14 @@ namespace ProgrammingLog.Extensions {
                 query = query.Where (pt => pt.ProgrammingLanguages.Any (pl => pl.LanguageId == queryObj.LanguageId));
             }
 
+            if (queryObj.TaskSummary != null) {
+                query = query.Where(pt => pt.Summary.Contains(queryObj.TaskSummary));
+            }
+
             /*
              * If we ever want to add more filter options other than Language we can add them here.
              */
-             
+
             return query;
         }
 
