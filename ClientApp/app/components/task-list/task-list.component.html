@@ -53,12 +53,9 @@
           <thead>
             <tr class="something">
               <th *ngFor="let c of columns">
-                <div *ngIf="c.isSortable" (click)="sortBy(c.key)" >
+                <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
                   {{ c.title }}
-                  <i *ngIf="query.sortBy === c.key"
-                      class="fa"
-                      [class.fa-sort-asc]="query.isSortAscending"
-                      [class.fa-sort-desc]="!query.isSortAscending">
+                  <i *ngIf="query.sortBy === c.key" class="fa" [class.fa-sort-asc]="query.isSortAscending" [class.fa-sort-desc]="!query.isSortAscending">
                   </i>
                 </div>
                 <div *ngIf="!c.isSortable">
@@ -67,7 +64,7 @@
               </th>
             </tr>
             <tr *ngFor='let task of queryResult.items | filter:Ng2Filter'>
-            <!-- <tr *ngFor='let task of allTasks | taskDateSort | filter:Ng2Filter'> -->
+              <!-- <tr *ngFor='let task of allTasks | taskDateSort | filter:Ng2Filter'> -->
               <td>
                 <a [routerLink]="['/tasks/', task.id]">{{ task.id }}</a>
               </td>
@@ -86,6 +83,13 @@
       </div>
 
       <pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+          <h5>Total Tasks: {{ queryResult.totalItems }}</h5>
+        </div>
+      </div>
 
     </form>
 
