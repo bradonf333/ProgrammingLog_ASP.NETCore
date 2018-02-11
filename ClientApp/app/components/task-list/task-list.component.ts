@@ -56,6 +56,8 @@ export class TaskListComponent implements OnInit {
   }
 
   onFilterChange() {
+    this.query.page = 1;
+    this.query.pageSize = this.PAGE_SIZE;
     this.populateTasks();
   }
 
@@ -89,4 +91,5 @@ export class TaskListComponent implements OnInit {
     }
     this.populateTasks();
   }
+  
 }
