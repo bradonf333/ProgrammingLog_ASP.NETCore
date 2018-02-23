@@ -22,33 +22,29 @@
           </div>
         </div>
         <div class="panel-body">
-          <h2>Basics</h2>
-          <ul>
-            <li>
-              <label class="label2">Hours:</label> {{ task.hours }}</li>
-            <li>
-              <label class="label2">TaskDate: </label> {{ task.taskDate | date:'short' }}</li>
-            <li>
+          <!-- List group -->
+          <ul class="list-group">
+            <li class="list-group-item">
+              <label class="label2">Hours:</label> {{ task.hours }}
+              <br>
+              <label class="label2">TaskDate: </label> {{ task.taskDate | date:'short' }}
+              <br>
+              <label class="label2">Language(s):</label>
+              <span *ngFor='let lang of task.languages; first as isFirst'>
+                {{ lang.language }}
+                <span *ngIf='isFirst && task.languages.length > 1'>,</span>
+              </span>
+              <br>
               <label class="label2">Summary:</label> {{ task.summary }}
-            </li>
-            <li>
-              <label class="label2">Description:</label>
-              <br>{{ task.description }}
+              <br>
+              <label class="label2">Description:</label> {{ task.description }}
             </li>
           </ul>
-          <h2>Language(s)</h2>
-          <ul>
-            <span *ngFor='let lang of task.languages; first as isFirst'>
-              {{ lang.language }}
-              <span *ngIf='isFirst && task.languages.length > 1'>,</span>
-            </span>
-          </ul>
-          <br/>
-          <p>
-            <a class="btn btn-primary" [routerLink]="['/tasks/', task.id]">Edit</a>
-            <button class="btn btn-danger" (click)="delete()">Delete</button>
-            <a class="btn btn-default" [routerLink]="['/tasks']">View All Tasks</a>
-          </p>
+          <div>
+            <a class="btn btn-primary" [routerLink]="['/tasks/', task.id]">Edit This Task</a>
+            <a class="btn btn-info" [routerLink]="['/tasks']">View All Tasks</a>
+            <button class="btn btn-danger" (click)="delete()">Delete This Task!</button>
+          </div>
         </div>
       </div>
     </div>

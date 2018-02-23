@@ -53,8 +53,7 @@ export class TaskViewComponent implements OnInit {
       // });
   }
 
-
-  deleteTask() {
+  delete() {
     if (confirm("Are you sure?")) {
       this.taskService.deleteTask(this.task.id)
         .subscribe(t => {
