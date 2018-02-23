@@ -12,7 +12,7 @@ import { KeyValuePair } from '../app/models/keyValuePair';
 })
 export class TaskListComponent implements OnInit {
 
-  private readonly PAGE_SIZE = 15;
+  private readonly PAGE_SIZE = 12;
   pageTitle: string = "Tasks";
   // queryResult: SaveProgrammingTask[];
   queryResult: any = {};
