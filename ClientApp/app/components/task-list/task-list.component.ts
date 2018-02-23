@@ -27,11 +27,12 @@ export class TaskListComponent implements OnInit {
   reverseSort: boolean = false;
   languages: KeyValuePair[];
   columns = [
-    { title: 'Id' },
+    // { title: 'Id' },
     { title: 'Hours', key: 'taskHours', isSortable: true },
     { title: 'Language(s)' },
     { title: 'Task Summary', key: 'taskSummary', isSortable: true },
-    { title: 'Task Date', key: 'taskDate', isSortable: true }
+    { title: 'Task Date', key: 'taskDate', isSortable: true },
+    { title: 'View Task'}
   ];
 
   constructor(private taskService: TaskService) { }

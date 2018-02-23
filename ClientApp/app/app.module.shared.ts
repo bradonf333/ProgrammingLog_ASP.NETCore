@@ -43,6 +43,7 @@ import { TaskViewComponent } from './components/task-view/task-view.component';
             { path: 'tasks', component: TaskListComponent},
             { path: 'tasks/new', component: TaskFormComponent},           
             { path: 'tasks/:id', component: TaskEditComponent},           
+            { path: 'taskView/:id', component: TaskViewComponent},           
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },

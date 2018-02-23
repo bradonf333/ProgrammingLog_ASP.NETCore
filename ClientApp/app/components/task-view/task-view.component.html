@@ -1,3 +1,73 @@
-<p>
-  task-view works!
-</p>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="nav-item active">
+      <a class="nav-link" href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Task</a>
+    </li>
+    <li role="presentation" class="nav-item">
+      <a class="nav-link" href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" *ngIf="task">
+    <br>
+    <!-- Task tab -->
+    <div role="tabpanel" class="tab-pane fade in active" id="basic">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <h3>Task Info</h3>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h2>Basics</h2>
+          <ul>
+            <li>
+              <label class="label2">Hours:</label> {{ task.hours }}</li>
+            <li>
+              <label class="label2">TaskDate: </label> {{ task.taskDate | date:'short' }}</li>
+            <li>
+              <label class="label2">Summary:</label> {{ task.summary }}
+            </li>
+            <li>
+              <label class="label2">Description:</label>
+              <br>{{ task.description }}
+            </li>
+          </ul>
+          <h2>Language(s)</h2>
+          <ul>
+            <span *ngFor='let lang of task.languages; first as isFirst'>
+              {{ lang.language }}
+              <span *ngIf='isFirst && task.languages.length > 1'>,</span>
+            </span>
+          </ul>
+          <br/>
+          <p>
+            <a class="btn btn-primary" [routerLink]="['/tasks/', task.id]">Edit</a>
+            <button class="btn btn-danger" (click)="delete()">Delete</button>
+            <a class="btn btn-default" [routerLink]="['/tasks']">View All Tasks</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photos tab -->
+    <div role="tabpanel" class="tab-pane fade in" id="photos">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <h3>Photos</h3>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At nesciunt architecto, rerum minima fugiat dignissimos,
+            eius ullam neque et fuga aspernatur veritatis quis tenetur. Officiis voluptatibus aspernatur mollitia unde atque?</p>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At nesciunt architecto, rerum minima fugiat dignissimos,
+            eius ullam neque et fuga aspernatur veritatis quis tenetur. Officiis voluptatibus aspernatur mollitia unde atque?</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
