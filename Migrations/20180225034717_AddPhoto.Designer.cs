@@ -11,9 +11,10 @@ using System;
 namespace ProgrammingLog.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    partial class TaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180225034717_AddPhoto")]
+    partial class AddPhoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +36,7 @@ namespace ProgrammingLog.Migrations
 
                     b.HasIndex("ProgrammingTaskId");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photo");
                 });
 
             modelBuilder.Entity("ProgrammingLog.Models.ProgrammingLanguage", b =>
