@@ -25,10 +25,12 @@ namespace ProgrammingLog.Models
         public DateTime TaskDate { get; set; }
 
         public IList<TaskLanguage> ProgrammingLanguages { get; set; }
+        public IList<Photo> Photos { get; set; }
 
         public ProgrammingTask()
         {
             ProgrammingLanguages = new List<TaskLanguage>();
+            Photos = new List<Photo>();
         }
 
     }
