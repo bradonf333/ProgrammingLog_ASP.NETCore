@@ -13,25 +13,26 @@ namespace ProgrammingLog.Mapping
         {
             // Domain to API Resource
             // CreateMap<Source, Destination>
+            CreateMap<Photo, PhotosResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<FilterResource, Filter>();
             CreateMap<TaskQueryResource, TaskQuery>();
             CreateMap<ProgrammingTask, SaveProgrammingTaskResource>()
-            .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
-                tl => new ProgrammingLanguage
-                {
-                    Id = tl.Language.Id,
-                    Language = tl.Language.Language
-                }
-            )));
+                .ForMember(ptr => ptr.Languages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
+                    tl => new ProgrammingLanguage
+                    {
+                        Id = tl.Language.Id,
+                            Language = tl.Language.Language
+                    }
+                )));
             CreateMap<ProgrammingTask, ProgrammingTaskResource>()
-            .ForMember(ptr => ptr.ProgrammingLanguages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
-                tl => new ProgrammingLanguage
-                {
-                    Id = tl.Language.Id,
-                    Language = tl.Language.Language
-                }
-            )));
+                .ForMember(ptr => ptr.ProgrammingLanguages, opt => opt.MapFrom(pt => pt.ProgrammingLanguages.Select(
+                    tl => new ProgrammingLanguage
+                    {
+                        Id = tl.Language.Id,
+                            Language = tl.Language.Language
+                    }
+                )));
 
             // API Resource to Domain
             // CreateMap<Source, Destination>
@@ -41,9 +42,9 @@ namespace ProgrammingLog.Mapping
                 .AfterMap((ptr, pt) =>
                 {
                     var languages = ptr.ProgrammingLanguages
-                    .Where(id => pt.ProgrammingLanguages
-                        .Any(tl => tl.LanguageId == id))
-                    .Select(id => new TaskLanguage { LanguageId = id, TaskId = pt.Id });
+                        .Where(id => pt.ProgrammingLanguages
+                            .Any(tl => tl.LanguageId == id))
+                        .Select(id => new TaskLanguage { LanguageId = id, TaskId = pt.Id });
 
                     foreach (var taskLanguage in languages)
                     {
@@ -51,7 +52,7 @@ namespace ProgrammingLog.Mapping
                     }
 
                 });
-                CreateMap<UpdateProgrammingTaskResource, ProgrammingTask>()
+            CreateMap<UpdateProgrammingTaskResource, ProgrammingTask>()
                 .ForMember(pt => pt.Id, opt => opt.Ignore())
                 .ForMember(pt => pt.ProgrammingLanguages, opt => opt.Ignore())
                 .AfterMap((ptr, pt) =>

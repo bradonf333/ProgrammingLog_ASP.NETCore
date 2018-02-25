@@ -32,7 +32,7 @@ export class TaskListComponent implements OnInit {
     { title: 'Language(s)' },
     { title: 'Task Summary', key: 'taskSummary', isSortable: true },
     { title: 'Task Date', key: 'taskDate', isSortable: true },
-    { title: 'View Task'}
+    { title: 'View Task' }
   ];
 
   constructor(private taskService: TaskService) { }
@@ -92,5 +92,5 @@ export class TaskListComponent implements OnInit {
     }
     this.populateTasks();
   }
-  
+
 }
