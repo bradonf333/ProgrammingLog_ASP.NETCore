@@ -1,3 +1,4 @@
+import { PhotoService } from './service/photo.service';
 import { TaskService } from './service/task.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
@@ -51,7 +52,7 @@ import { TaskViewComponent } from './components/task-view/task-view.component';
         ]),
         Ng2SearchPipeModule
     ],
-    providers: [ TaskService ]
+    providers: [ TaskService, PhotoService ]
 })
 export class AppModuleShared {
 }

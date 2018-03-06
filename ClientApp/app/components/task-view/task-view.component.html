@@ -58,11 +58,10 @@
           </div>
         </div>
         <div class="panel-body">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At nesciunt architecto, rerum minima fugiat dignissimos,
-            eius ullam neque et fuga aspernatur veritatis quis tenetur. Officiis voluptatibus aspernatur mollitia unde atque?</p>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At nesciunt architecto, rerum minima fugiat dignissimos,
-            eius ullam neque et fuga aspernatur veritatis quis tenetur. Officiis voluptatibus aspernatur mollitia unde atque?</p>
-        </div>
+            <input type="file" (change)="uploadPhoto()" #fileInput>
+            <br>
+            <img *ngFor="let photo of photos" src="/uploads/{{ photo.fileName }}" class="img-thumbnail">
+          </div>
       </div>
     </div>
 

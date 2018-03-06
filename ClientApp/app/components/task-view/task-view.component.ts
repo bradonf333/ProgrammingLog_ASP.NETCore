@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { PhotoService } from './../../service/photo.service';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TaskService } from "../../service/task.service";
 import { Router, ActivatedRoute } from '@angular/router'
 import { ProgrammingTask } from "../app/models/task";
@@ -15,19 +16,22 @@ export class TaskViewComponent implements OnInit {
   taskId: number;
   languages: KeyValuePair[];
   task: any;
+  photos: any[];
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private taskService: TaskService) {
+    private taskService: TaskService,
+    private photoService: PhotoService) {
 
-      route.params.subscribe(p => {
-        this.taskId = +p['id'];
-        if (isNaN(this.taskId) || this.taskId <= 0) {
-          router.navigate(['/tasks']);
-          return;
-        }
-      });
+    route.params.subscribe(p => {
+      this.taskId = +p['id'];
+      if (isNaN(this.taskId) || this.taskId <= 0) {
+        router.navigate(['/tasks']);
+        return;
+      }
+    });
   }
 
   ngOnInit() {
@@ -37,20 +41,24 @@ export class TaskViewComponent implements OnInit {
     //   .subscribe(task => {
     //     this.setTask(task);
     //   });
+
+    this.photoService.getPhotos(this.taskId)
+      .subscribe(photos => this.photos = photos);
+
     this.taskService.getTask(this.taskId)
       .subscribe(
-        t => this.task = t,
-        err => {
-          if (err.status == 404) {
-            this.router.navigate(['/tasks']);
-            return;
-          }
-        });
+      t => this.task = t,
+      err => {
+        if (err.status == 404) {
+          this.router.navigate(['/tasks']);
+          return;
+        }
+      });
 
-      // this.taskService.getLanguages()
-      // .subscribe(languages => {
-      //   this.languages = languages;
-      // });
+    // this.taskService.getLanguages()
+    // .subscribe(languages => {
+    //   this.languages = languages;
+    // });
   }
 
   delete() {
@@ -60,5 +68,14 @@ export class TaskViewComponent implements OnInit {
           this.router.navigate(['/tasks']);
         });
     }
+  }
+
+  uploadPhoto() {
+    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+
+    this.photoService.upload(this.taskId, nativeElement.files![0])
+      .subscribe(photo => {
+        this.photos.push(photo);
+      });
   }
 }
