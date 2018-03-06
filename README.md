@@ -18,6 +18,8 @@ I can go back to any point in time and look to see what I worked on that day.
 App has a top nav bar and loads the pages below.
 ![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/NavBarDemo.gif "Main Index")
 
+---
+
 ### Pagination - Task List
 
 Pagination done via the server. The logic for paging the tasks is done with ASP.NET Core and Entity Framework. The actual Pagination Component which displays the pagination info is done with Angular. When you've reached the end of the tasks you can't click the next button. Same goes when at the beginning of the list. You cannot go backwards in the pagination component.
