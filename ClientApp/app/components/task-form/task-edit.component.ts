@@ -49,7 +49,7 @@ export class TaskEditComponent implements OnInit {
     this.taskService.getLanguages()
       .subscribe(languages => {
         this.languages = languages;
-        this.languages = this.languages.sort(function(a,b) {
+        this.languages = this.languages.sort(function (a, b) {
           return a.language.localeCompare(b.language);
         });
         console.log("Languages", this.languages);
@@ -108,6 +108,7 @@ export class TaskEditComponent implements OnInit {
   submit() {
     this.taskService.updateTask(this.mainTask)
       .subscribe(t => alert("The Task Id: " + this.mainTask.id + " has been successfully updated!"));
+    this.router.navigate(['/taskView/' + this.mainTask.id]);
   }
 
   deleteTask() {
