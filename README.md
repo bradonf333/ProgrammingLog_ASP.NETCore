@@ -24,3 +24,9 @@ App has a top nav bar and loads each page in the main section below.
 
 Pagination done via the server. Breaks out the list of the Programming Tasks into separate pages. The logic for paging the tasks is done with ASP.NET Core and Entity Framework, rather than doing it on the Client-Side with Angular. The actual Pagination Component which displays the pagination info is done with Angular. When you've reached the end of the tasks you can't click the next button. Same applies when you are at the beginning of the list. You cannot go backwards in the pagination component.
 ![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/Pagination.gif "Task List - Pagination")
+
+---
+
+### Sorting - Task List
+The list of Programming Tasks is defaulted to sort by the Task Date in DESC order. That way the newest tasks are displayed first. Sorting is done via the server, same as the Pagination. When clicking on a column header it sorts the list by that column and displays an arrow to indicate sorting desc or asc.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/Sorting.gif "Task List - Sorting")
