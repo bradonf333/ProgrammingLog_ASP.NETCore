@@ -30,3 +30,10 @@ Pagination done via the server. Breaks out the list of the Programming Tasks int
 ### Sorting - Task List
 The list of Programming Tasks is defaulted to sort by the Task Date in DESC order. That way the newest tasks are displayed first. Sorting is done via the server, same as the Pagination. When clicking on a column header it sorts the list by that column and displays an arrow to indicate sorting desc or asc.
 ![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/Sorting.gif "Task List - Sorting")
+
+
+---
+
+### Language Filter - Task List
+The Language filter drop down is populated by querying the available languages in the database. When one of the languages is selected in the dropdown the list of Tasks is filtered to only include those Tasks that have that language listed.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/LanguageFilterDropDown.PNG "Task List - LanguageSort")
