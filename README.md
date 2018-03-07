@@ -55,3 +55,14 @@ The Summary filter is able to search the Task Summary using a text search. This 
 ### Multiple Filters - Task List
 The filtered list of tasks is used as the main context, so when multiple filters are applied the second filter does not reset the list, it filters based on the already filtered list. Also able to reset all filters with a button and return to the full list of tasks.
 ![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/MultipleFilters.gif "Task List - MultipleFilters")
+
+
+---
+
+## Demos TODO
+### ViewTask
+### EditTask
+### CreateTask
+### DeleteTask
+### Demonstrate Photo Upload Page
+
