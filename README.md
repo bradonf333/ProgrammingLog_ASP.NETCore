@@ -36,8 +36,22 @@ The list of Programming Tasks is defaulted to sort by the Task Date in DESC orde
 
 ### Language Filter - Task List
 The Language filter drop down is populated by querying the available languages in the database. When one of the languages is selected in the dropdown the list of Tasks is filtered to only include those Tasks that have that language listed. This filtering is done on the server. Also notice that down below the total tasks count is updated to reflect the new count based on Tasks with the Language selected. Selecting no value in this dropdown defaults back to all Tasks.
-![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/LanguageFilterDropDown.PNG "Task List - LanguageSort PNG")
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/LanguageFilterDropDown.PNG "Task List - LanguageFilter PNG")
 
 For some reason the drop down box didn't record so here is a screenshot.
 
-![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/LangaugeFilter.gif "Task List - LanguageSort")
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/LangaugeFilter.gif "Task List - LanguageFilter")
+
+
+---
+
+### Summary Filter - Task List
+The Summary filter is able to search the Task Summary using a text search. This filtering is also done on the server. Again the total tasks count is updated to reflect the new count based on filter.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/SummaryFilter.gif "Task List - SummaryFilter")
+
+
+---
+
+### Multiple Filters - Task List
+The filtered list of tasks is used as the main context, so when multiple filters are applied the second filter does not reset the list, it filters based on the already filtered list. Also able to reset all filters with a button and return to the full list of tasks.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/MultipleFilters.gif "Task List - MultipleFilters")
