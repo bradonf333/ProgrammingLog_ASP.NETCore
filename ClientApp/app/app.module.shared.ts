@@ -1,3 +1,5 @@
+import { BrowserXhr } from '@angular/http';
+import { ProgressService, BrowserXhrWithProgress } from './service/progress.service';
 import { PhotoService } from './service/photo.service';
 import { TaskService } from './service/task.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -52,7 +54,10 @@ import { TaskViewComponent } from './components/task-view/task-view.component';
         ]),
         Ng2SearchPipeModule
     ],
-    providers: [ TaskService, PhotoService ]
+    providers: [
+        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        TaskService, PhotoService, ProgressService 
+    ]
 })
 export class AppModuleShared {
 }

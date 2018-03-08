@@ -1,3 +1,4 @@
+import { ProgressService } from './../../service/progress.service';
 import { PhotoService } from './../../service/photo.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TaskService } from "../../service/task.service";
@@ -23,7 +24,9 @@ export class TaskViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskService,
-    private photoService: PhotoService) {
+    private photoService: PhotoService,
+    private progressService: ProgressService
+  ) {
 
     route.params.subscribe(p => {
       this.taskId = +p['id'];
@@ -72,6 +75,9 @@ export class TaskViewComponent implements OnInit {
 
   uploadPhoto() {
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+
+    this.progressService.uploadProgress
+      .subscribe(progress => console.log(progress));
 
     this.photoService.upload(this.taskId, nativeElement.files![0])
       .subscribe(photo => {
