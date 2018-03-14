@@ -1,6 +1,6 @@
 import { ProgressService } from './../../service/progress.service';
 import { PhotoService } from './../../service/photo.service';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { TaskService } from "../../service/task.service";
 import { Router, ActivatedRoute } from '@angular/router'
 import { ProgrammingTask } from "../app/models/task";
@@ -14,13 +14,15 @@ import { KeyValuePair } from "../app/models/keyValuePair";
 })
 export class TaskViewComponent implements OnInit {
 
+  @ViewChild('fileInput') fileInput: ElementRef;
   taskId: number;
   languages: KeyValuePair[];
   task: any;
   photos: any[];
-  @ViewChild('fileInput') fileInput: ElementRef;
+  progress: any;
 
   constructor(
+    private zone: NgZone,
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskService,
@@ -76,12 +78,20 @@ export class TaskViewComponent implements OnInit {
   uploadPhoto() {
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
 
-    this.progressService.uploadProgress
-      .subscribe(progress => console.log(progress));
+    this.progressService.startTracking()
+      .subscribe(progress => {
+        console.log(progress);
+        this.zone.run(() => {
+          this.progress = progress;
+        });
+      });
 
     this.photoService.upload(this.taskId, nativeElement.files![0])
       .subscribe(photo => {
         this.photos.push(photo);
+      },
+      err => {
+        alert(err.text());
       });
   }
 }
