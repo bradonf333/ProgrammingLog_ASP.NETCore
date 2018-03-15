@@ -59,6 +59,14 @@ The filtered list of tasks is used as the main context, so when multiple filters
 
 ---
 
+### View Task
+In the View Task we have access to Edit the task, go back to the list of all tasks or Delete the task.
+
+The task id is passed in the route and that is how the form is populated with the task info.
+
+This page has 2 tabs, the Task Info and any Photos uploaded for the task.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/ViewTaskOverview.gif "View Task - Overview")
+
 ## Demos TODO
 ### ViewTask
 ### EditTask
