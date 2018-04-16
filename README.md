@@ -59,6 +59,14 @@ The filtered list of tasks is used as the main context, so when multiple filters
 
 ---
 
+### Create Task
+We can access the Create Task route by either clicking the button or via the nav bar link.
+
+When the task has successfully been created you get an alert letting you know.
+![alt text](https://github.com/bradonf333/ProgrammingLog_ASP.NETCore/blob/master/Demos/CreateTask.gif "Create Task - Overview")
+
+---
+
 ### View Task
 In the View Task we have access to Edit the task, go back to the list of all tasks or Delete the task.
 
