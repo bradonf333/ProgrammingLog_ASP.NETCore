@@ -9,6 +9,12 @@
         <li>
           <a [routerLink]="['/tasks/new']">Create Task</a>
         </li>
+        <li [routerLinkActive]="['link-active']">
+          <a (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Login</a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Logout</a>
+        </li>
       </ul>
     </div>
   </nav>

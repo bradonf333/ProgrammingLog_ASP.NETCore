@@ -1,3 +1,4 @@
+import { AuthService } from './../../service/auth.service';
 import { Query } from './../app/models/query';
 import { SaveProgrammingTask } from './../app/models/saveTask';
 import { TaskService } from './../../service/task.service';
@@ -92,5 +93,4 @@ export class TaskListComponent implements OnInit {
     }
     this.populateTasks();
   }
-
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './service/auth.service';
 import { BrowserXhr } from '@angular/http';
 import { ProgressService, BrowserXhrWithProgress } from './service/progress.service';
 import { PhotoService } from './service/photo.service';
@@ -56,7 +57,7 @@ import { TaskViewComponent } from './components/task-view/task-view.component';
     ],
     providers: [
         { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
-        TaskService, PhotoService, ProgressService 
+        TaskService, PhotoService, ProgressService, AuthService
     ]
 })
 export class AppModuleShared {

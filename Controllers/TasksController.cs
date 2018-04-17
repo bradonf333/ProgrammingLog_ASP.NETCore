@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingLog.Controllers.Resources;
@@ -67,6 +68,7 @@ namespace ProgrammingLog.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateTask(int id, [FromBody] UpdateProgrammingTaskResource taskResource)
         {
             if (!ModelState.IsValid)
@@ -94,6 +96,7 @@ namespace ProgrammingLog.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteTask(int id)
         {
             var task = await repository.GetTaskAsync(id);
